@@ -1,0 +1,3650 @@
+[
+  {
+    "id": 1,
+    "title": "Two Sum",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "Hash Map"
+    ],
+    "acceptanceRatePercent": 78,
+    "description": "Given an array of integers and a target, return indices of two numbers that add up to target.",
+    "examples": [
+      {
+        "i": "nums=[2,7,11,15], target=9",
+        "o": "[0,1]"
+      },
+      {
+        "i": "nums=[3,2,4], target=6",
+        "o": "[1,2]"
+      }
+    ],
+    "constraints": [
+      "2≤n≤10⁴",
+      "−10⁹≤nums[i]≤10⁹"
+    ],
+    "testCases": [
+      {
+        "i": "[2,7,11,15], 9",
+        "o": "[0,1]"
+      },
+      {
+        "i": "[3,2,4], 6",
+        "o": "[1,2]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Longest Palindromic Substring",
+    "difficulty": "Medium",
+    "tags": [
+      "String",
+      "DP"
+    ],
+    "acceptanceRatePercent": 54,
+    "description": "Given a string s, return the longest palindromic substring.",
+    "examples": [
+      {
+        "i": "s=\"babad\"",
+        "o": "\"bab\""
+      },
+      {
+        "i": "s=\"cbbd\"",
+        "o": "\"bb\""
+      }
+    ],
+    "constraints": [
+      "1≤s.length≤1000"
+    ],
+    "testCases": [
+      {
+        "i": "\"babad\"",
+        "o": "\"bab\""
+      },
+      {
+        "i": "\"cbbd\"",
+        "o": "\"bb\""
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Median of Two Sorted Arrays",
+    "difficulty": "Hard",
+    "tags": [
+      "Array",
+      "Binary Search"
+    ],
+    "acceptanceRatePercent": 38,
+    "description": "Find the median of two sorted arrays in O(log(m+n)) time.",
+    "examples": [
+      {
+        "i": "nums1=[1,3], nums2=[2]",
+        "o": "2.00000"
+      }
+    ],
+    "constraints": [
+      "0≤m,n≤1000"
+    ],
+    "testCases": [
+      {
+        "i": "[1,3],[2]",
+        "o": "2.00000"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 4,
+    "title": "Valid Parentheses",
+    "difficulty": "Easy",
+    "tags": [
+      "Stack",
+      "String"
+    ],
+    "acceptanceRatePercent": 71,
+    "description": "Given a string with brackets, determine if it is valid.",
+    "examples": [
+      {
+        "i": "s=\"()\"",
+        "o": "true"
+      },
+      {
+        "i": "s=\"(]\"",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "1≤s.length≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "\"()\"",
+        "o": "true"
+      },
+      {
+        "i": "\"(]\"",
+        "o": "false"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 5,
+    "title": "Maximum Subarray",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "DP"
+    ],
+    "acceptanceRatePercent": 65,
+    "description": "Find the subarray with the largest sum.",
+    "examples": [
+      {
+        "i": "[-2,1,-3,4,-1,2,1,-5,4]",
+        "o": "6",
+        "e": "[4,-1,2,1] has sum 6"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[-2,1,-3,4,-1,2,1,-5,4]",
+        "o": "6"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 6,
+    "title": "Word Search",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Backtracking"
+    ],
+    "acceptanceRatePercent": 43,
+    "description": "Given a board and a word, return true if the word exists in the grid.",
+    "examples": [
+      {
+        "i": "board=[[\"A\",\"B\"],[\"C\",\"D\"]], word=\"AB\"",
+        "o": "true"
+      }
+    ],
+    "constraints": [
+      "1≤m,n≤6",
+      "1≤word.length≤15"
+    ],
+    "testCases": [
+      {
+        "i": "[ [\"A\",\"B\"] ],\"AB\"",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 7,
+    "title": "Reverse Linked List",
+    "difficulty": "Easy",
+    "tags": [
+      "Linked List",
+      "Recursion"
+    ],
+    "acceptanceRatePercent": 74,
+    "description": "Reverse a singly linked list.",
+    "examples": [
+      {
+        "i": "[1,2,3,4,5]",
+        "o": "[5,4,3,2,1]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤5000"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3,4,5]",
+        "o": "[5,4,3,2,1]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 8,
+    "title": "Binary Search",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "Binary Search"
+    ],
+    "acceptanceRatePercent": 68,
+    "description": "Search for target in a sorted array. Return index or -1.",
+    "examples": [
+      {
+        "i": "[-1,0,3,5,9,12], target=9",
+        "o": "4"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁴",
+      "All integers unique"
+    ],
+    "testCases": [
+      {
+        "i": "[-1,0,3,5,9,12], 9",
+        "o": "4"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 9,
+    "title": "Climbing Stairs",
+    "difficulty": "Easy",
+    "tags": [
+      "DP",
+      "Math"
+    ],
+    "acceptanceRatePercent": 72,
+    "description": "Count distinct ways to climb n stairs (1 or 2 steps at a time).",
+    "examples": [
+      {
+        "i": "n=3",
+        "o": "3",
+        "e": "1+1+1, 1+2, 2+1"
+      }
+    ],
+    "constraints": [
+      "1≤n≤45"
+    ],
+    "testCases": [
+      {
+        "i": "2",
+        "o": "2"
+      },
+      {
+        "i": "3",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 10,
+    "title": "Merge Two Sorted Lists",
+    "difficulty": "Easy",
+    "tags": [
+      "Linked List",
+      "Recursion"
+    ],
+    "acceptanceRatePercent": 69,
+    "description": "Merge two sorted linked lists into one sorted list.",
+    "examples": [
+      {
+        "i": "[1,2,4],[1,3,4]",
+        "o": "[1,1,2,3,4,4]"
+      }
+    ],
+    "constraints": [
+      "0≤n,m≤50"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,4],[1,3,4]",
+        "o": "[1,1,2,3,4,4]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 11,
+    "title": "Best Time to Buy and Sell Stock",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "DP"
+    ],
+    "acceptanceRatePercent": 66,
+    "description": "Maximize profit by choosing one buy and one sell day.",
+    "examples": [
+      {
+        "i": "[7,1,5,3,6,4]",
+        "o": "5",
+        "e": "Buy day2(1), sell day5(6)"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[7,1,5,3,6,4]",
+        "o": "5"
+      },
+      {
+        "i": "[7,6,4,3,1]",
+        "o": "0"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 12,
+    "title": "Linked List Cycle",
+    "difficulty": "Easy",
+    "tags": [
+      "Linked List",
+      "Two Pointers"
+    ],
+    "acceptanceRatePercent": 60,
+    "description": "Determine if a linked list has a cycle.",
+    "examples": [
+      {
+        "i": "{\"head\":[3,2,0,-4],\"pos\":1}",
+        "o": "true"
+      }
+    ],
+    "constraints": [
+      "0≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "{\"head\":[3,2,0,-4],\"pos\":1}",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 13,
+    "title": "3Sum",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Two Pointers",
+      "Sorting"
+    ],
+    "acceptanceRatePercent": 48,
+    "description": "Find all unique triplets that sum to zero.",
+    "examples": [
+      {
+        "i": "[-1,0,1,2,-1,-4]",
+        "o": "[[-1,-1,2],[-1,0,1]]"
+      }
+    ],
+    "constraints": [
+      "3≤n≤3000"
+    ],
+    "testCases": [
+      {
+        "i": "[-1,0,1,2,-1,-4]",
+        "o": "[[-1,-1,2],[-1,0,1]]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 14,
+    "title": "Container With Most Water",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Two Pointers"
+    ],
+    "acceptanceRatePercent": 55,
+    "description": "Find two lines forming a container with most water.",
+    "examples": [
+      {
+        "i": "[1,8,6,2,5,4,8,3,7]",
+        "o": "49"
+      }
+    ],
+    "constraints": [
+      "2≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[1,8,6,2,5,4,8,3,7]",
+        "o": "49"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 15,
+    "title": "Letter Combinations",
+    "difficulty": "Medium",
+    "tags": [
+      "String",
+      "Backtracking"
+    ],
+    "acceptanceRatePercent": 52,
+    "description": "Return all letter combinations for a phone number digit string.",
+    "examples": [
+      {
+        "i": "\"23\"",
+        "o": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]"
+      }
+    ],
+    "constraints": [
+      "0≤digits.length≤4"
+    ],
+    "testCases": [
+      {
+        "i": "\"23\"",
+        "o": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]",
+        "unordered": true
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 16,
+    "title": "Generate Parentheses",
+    "difficulty": "Medium",
+    "tags": [
+      "String",
+      "Backtracking",
+      "DP"
+    ],
+    "acceptanceRatePercent": 58,
+    "description": "Generate all valid combinations of n pairs of parentheses.",
+    "examples": [
+      {
+        "i": "n=3",
+        "o": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤8"
+    ],
+    "testCases": [
+      {
+        "i": "3",
+        "o": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"
+      },
+      {
+        "i": "1",
+        "o": "[\"()\"]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 17,
+    "title": "Trapping Rain Water",
+    "difficulty": "Hard",
+    "tags": [
+      "Array",
+      "Two Pointers",
+      "DP"
+    ],
+    "acceptanceRatePercent": 45,
+    "description": "Compute how much water can be trapped between bars.",
+    "examples": [
+      {
+        "i": "[0,1,0,2,1,0,1,3,2,1,2,1]",
+        "o": "6"
+      },
+      {
+        "i": "[4,2,0,3,2,5]",
+        "o": "9"
+      }
+    ],
+    "constraints": [
+      "1≤n≤2×10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[0,1,0,2,1,0,1,3,2,1,2,1]",
+        "o": "6"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 18,
+    "title": "Jump Game",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Greedy"
+    ],
+    "acceptanceRatePercent": 50,
+    "description": "Can you reach the last index from position 0?",
+    "examples": [
+      {
+        "i": "[2,3,1,1,4]",
+        "o": "true"
+      },
+      {
+        "i": "[3,2,1,0,4]",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[2,3,1,1,4]",
+        "o": "true"
+      },
+      {
+        "i": "[3,2,1,0,4]",
+        "o": "false"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 19,
+    "title": "Unique Paths",
+    "difficulty": "Medium",
+    "tags": [
+      "DP",
+      "Math"
+    ],
+    "acceptanceRatePercent": 62,
+    "description": "Count unique paths from top-left to bottom-right of an m×n grid.",
+    "examples": [
+      {
+        "i": "m=3,n=7",
+        "o": "28"
+      },
+      {
+        "i": "m=3,n=2",
+        "o": "3"
+      }
+    ],
+    "constraints": [
+      "1≤m,n≤100"
+    ],
+    "testCases": [
+      {
+        "i": "3,7",
+        "o": "28"
+      },
+      {
+        "i": "3,2",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 20,
+    "title": "Coin Change",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "DP",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 46,
+    "description": "Find the minimum number of coins to make amount.",
+    "examples": [
+      {
+        "i": "coins=[1,5,10], amount=11",
+        "o": "2"
+      },
+      {
+        "i": "coins=[2], amount=3",
+        "o": "-1"
+      }
+    ],
+    "constraints": [
+      "1≤coins.length≤12"
+    ],
+    "testCases": [
+      {
+        "i": "[1,5,10], 11",
+        "o": "2"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 21,
+    "title": "Number of Islands",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "BFS",
+      "DFS"
+    ],
+    "acceptanceRatePercent": 57,
+    "description": "Count the number of islands in a binary grid.",
+    "examples": [
+      {
+        "i": "[ [\"1\",\"1\",\"0\"], [\"0\",\"1\",\"0\"], [\"0\",\"0\",\"1\"] ]",
+        "o": "2"
+      }
+    ],
+    "constraints": [
+      "1≤m,n≤300"
+    ],
+    "testCases": [
+      {
+        "i": "[[\"1\",\"1\",\"0\"],[\"0\",\"1\",\"0\"],[\"0\",\"0\",\"1\"]]",
+        "o": "2"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 22,
+    "title": "Rotate Image",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Matrix"
+    ],
+    "acceptanceRatePercent": 61,
+    "description": "Rotate an n×n matrix 90 degrees clockwise in-place.",
+    "examples": [
+      {
+        "i": "[[1,2,3],[4,5,6],[7,8,9]]",
+        "o": "[[7,4,1],[8,5,2],[9,6,3]]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤20"
+    ],
+    "testCases": [
+      {
+        "i": "[[1,2,3],[4,5,6],[7,8,9]]",
+        "o": "[[7,4,1],[8,5,2],[9,6,3]]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 23,
+    "title": "Group Anagrams",
+    "difficulty": "Medium",
+    "tags": [
+      "Hash Table",
+      "String",
+      "Sorting"
+    ],
+    "acceptanceRatePercent": 53,
+    "description": "Group an array of strings by their anagrams.",
+    "examples": [
+      {
+        "i": "[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+        "o": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]"
+      }
+    ],
+    "constraints": [
+      "1≤strs.length≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[\"eat\",\"tea\",\"tan\"]",
+        "o": "[[\"eat\",\"tea\",\"ate\"]]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 24,
+    "title": "Spiral Matrix",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Matrix",
+      "Simulation"
+    ],
+    "acceptanceRatePercent": 48,
+    "description": "Return all elements of a matrix in spiral order.",
+    "examples": [
+      {
+        "i": "[[1,2,3],[4,5,6],[7,8,9]]",
+        "o": "[1,2,3,6,9,8,7,4,5]"
+      }
+    ],
+    "constraints": [
+      "1≤m,n≤10"
+    ],
+    "testCases": [
+      {
+        "i": "[[1,2,3],[4,5,6],[7,8,9]]",
+        "o": "[1,2,3,6,9,8,7,4,5]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 25,
+    "title": "Subsets",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Backtracking"
+    ],
+    "acceptanceRatePercent": 55,
+    "description": "Return all possible subsets (power set) of a unique array.",
+    "examples": [
+      {
+        "i": "[1,2,3]",
+        "o": "[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3]",
+        "o": "8 subsets"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 26,
+    "title": "Permutations",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Backtracking"
+    ],
+    "acceptanceRatePercent": 57,
+    "description": "Return all possible permutations of distinct integers.",
+    "examples": [
+      {
+        "i": "[1,2,3]",
+        "o": "[[1,2,3],[1,3,2],[2,1,3],...]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤6"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3]",
+        "o": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]",
+        "unordered": true
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 27,
+    "title": "Search in Rotated Sorted Array",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Binary Search"
+    ],
+    "acceptanceRatePercent": 47,
+    "description": "Search for target in a rotated sorted array.",
+    "examples": [
+      {
+        "i": "[4,5,6,7,0,1,2], target=0",
+        "o": "4"
+      }
+    ],
+    "constraints": [
+      "1≤n≤5000",
+      "All values unique"
+    ],
+    "testCases": [
+      {
+        "i": "[4,5,6,7,0,1,2], 0",
+        "o": "4"
+      },
+      {
+        "i": "[4,5,6,7,0,1,2], 3",
+        "o": "-1"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 28,
+    "title": "Find Minimum in Rotated Sorted Array",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Binary Search"
+    ],
+    "acceptanceRatePercent": 52,
+    "description": "Find the minimum element in a rotated sorted array.",
+    "examples": [
+      {
+        "i": "[3,4,5,1,2]",
+        "o": "1"
+      },
+      {
+        "i": "[4,5,6,7,0,1,2]",
+        "o": "0"
+      }
+    ],
+    "constraints": [
+      "1≤n≤5000",
+      "All integers unique"
+    ],
+    "testCases": [
+      {
+        "i": "[3,4,5,1,2]",
+        "o": "1"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 29,
+    "title": "Product of Array Except Self",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Prefix Sum"
+    ],
+    "acceptanceRatePercent": 59,
+    "description": "Return an array where each element is the product of all others.",
+    "examples": [
+      {
+        "i": "[1,2,3,4]",
+        "o": "[24,12,8,6]"
+      }
+    ],
+    "constraints": [
+      "2≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3,4]",
+        "o": "[24,12,8,6]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 30,
+    "title": "Longest Consecutive Sequence",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Hash Table"
+    ],
+    "acceptanceRatePercent": 49,
+    "description": "Find the length of the longest consecutive elements sequence in O(n).",
+    "examples": [
+      {
+        "i": "[100,4,200,1,3,2]",
+        "o": "4",
+        "e": "[1,2,3,4]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[100,4,200,1,3,2]",
+        "o": "4"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 31,
+    "title": "Minimum Window Substring",
+    "difficulty": "Hard",
+    "tags": [
+      "Hash Table",
+      "String",
+      "Sliding Window"
+    ],
+    "acceptanceRatePercent": 39,
+    "description": "Find the minimum window in s containing all characters of t.",
+    "examples": [
+      {
+        "i": "s=\"ADOBECODEBANC\", t=\"ABC\"",
+        "o": "\"BANC\""
+      }
+    ],
+    "constraints": [
+      "1≤s.length,t.length≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "\"ADOBECODEBANC\",\"ABC\"",
+        "o": "\"BANC\""
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 32,
+    "title": "Serialize and Deserialize Binary Tree",
+    "difficulty": "Hard",
+    "tags": [
+      "Tree",
+      "BFS",
+      "DFS"
+    ],
+    "acceptanceRatePercent": 41,
+    "description": "Design an algorithm to serialize and deserialize a binary tree.",
+    "examples": [
+      {
+        "i": "[1,2,3,null,null,4,5]",
+        "o": "[1,2,3,null,null,4,5]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3,null,null,4,5]",
+        "o": "same structure"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 33,
+    "title": "LRU Cache",
+    "difficulty": "Medium",
+    "tags": [
+      "Hash Table",
+      "Linked List",
+      "Design"
+    ],
+    "acceptanceRatePercent": 44,
+    "description": "Design an LRU cache with O(1) get and put operations.",
+    "examples": [
+      {
+        "i": "capacity=2, put(1,1), put(2,2), get(1), put(3,3), get(2)",
+        "o": "1, -1"
+      }
+    ],
+    "constraints": [
+      "1≤capacity≤3000"
+    ],
+    "testCases": [
+      {
+        "i": "{\"capacity\":2,\"operations\":[[\"put\",1,1],[\"put\",2,2],[\"get\",1],[\"put\",3,3],[\"get\",2]]}",
+        "o": "[null,null,null,1,-1]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 34,
+    "title": "Course Schedule",
+    "difficulty": "Medium",
+    "tags": [
+      "Graph",
+      "BFS",
+      "Topological Sort"
+    ],
+    "acceptanceRatePercent": 46,
+    "description": "Determine if you can finish all courses given prerequisites.",
+    "examples": [
+      {
+        "i": "numCourses=2, prerequisites=[[1,0]]",
+        "o": "true"
+      },
+      {
+        "i": "prerequisites=[[1,0],[0,1]]",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "1≤numCourses≤2000"
+    ],
+    "testCases": [
+      {
+        "i": "2, [[1,0]]",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 35,
+    "title": "Word Ladder",
+    "difficulty": "Hard",
+    "tags": [
+      "Hash Table",
+      "String",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 37,
+    "description": "Find the shortest transformation sequence from beginWord to endWord.",
+    "examples": [
+      {
+        "i": "beginWord=\"hit\", endWord=\"cog\", wordList=[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+        "o": "5"
+      }
+    ],
+    "constraints": [
+      "1≤beginWord.length≤10"
+    ],
+    "testCases": [
+      {
+        "i": "\"hit\",\"cog\"",
+        "o": "5"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 36,
+    "title": "Maximum Depth of Binary Tree",
+    "difficulty": "Easy",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 75,
+    "description": "Return the maximum depth of a binary tree.",
+    "examples": [
+      {
+        "i": "[3,9,20,null,null,15,7]",
+        "o": "3"
+      }
+    ],
+    "constraints": [
+      "0≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[3,9,20,null,null,15,7]",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 37,
+    "title": "Symmetric Tree",
+    "difficulty": "Easy",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 67,
+    "description": "Check whether a binary tree is a mirror of itself.",
+    "examples": [
+      {
+        "i": "[1,2,2,3,4,4,3]",
+        "o": "true"
+      },
+      {
+        "i": "[1,2,2,null,3,null,3]",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "1≤n≤1000"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,2,3,4,4,3]",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 38,
+    "title": "Validate Binary Search Tree",
+    "difficulty": "Medium",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BST"
+    ],
+    "acceptanceRatePercent": 50,
+    "description": "Determine if a binary tree is a valid BST.",
+    "examples": [
+      {
+        "i": "[2,1,3]",
+        "o": "true"
+      },
+      {
+        "i": "[5,1,4,null,null,3,6]",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[2,1,3]",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 39,
+    "title": "Binary Tree Level Order Traversal",
+    "difficulty": "Medium",
+    "tags": [
+      "Tree",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 60,
+    "description": "Return level-order traversal of binary tree node values.",
+    "examples": [
+      {
+        "i": "[3,9,20,null,null,15,7]",
+        "o": "[[3],[9,20],[15,7]]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤2000"
+    ],
+    "testCases": [
+      {
+        "i": "[3,9,20,null,null,15,7]",
+        "o": "[[3],[9,20],[15,7]]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 40,
+    "title": "Kth Largest Element in an Array",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Quickselect",
+      "Heap"
+    ],
+    "acceptanceRatePercent": 56,
+    "description": "Return the kth largest element in an unsorted array.",
+    "examples": [
+      {
+        "i": "[3,2,1,5,6,4], k=2",
+        "o": "5"
+      }
+    ],
+    "constraints": [
+      "1≤k≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[3,2,1,5,6,4], 2",
+        "o": "5"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 41,
+    "title": "Top K Frequent Elements",
+    "difficulty": "Medium",
+    "tags": [
+      "Hash Table",
+      "Heap",
+      "Bucket Sort"
+    ],
+    "acceptanceRatePercent": 58,
+    "description": "Return the k most frequent elements.",
+    "examples": [
+      {
+        "i": "[1,1,1,2,2,3], k=2",
+        "o": "[1,2]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[1,1,1,2,2,3], 2",
+        "o": "[1,2]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 42,
+    "title": "Meeting Rooms II",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Heap",
+      "Sorting"
+    ],
+    "acceptanceRatePercent": 51,
+    "description": "Return the minimum number of conference rooms required.",
+    "examples": [
+      {
+        "i": "[[0,30],[5,10],[15,20]]",
+        "o": "2"
+      }
+    ],
+    "constraints": [
+      "1≤intervals.length≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[[0,30],[5,10],[15,20]]",
+        "o": "2"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 43,
+    "title": "Alien Dictionary",
+    "difficulty": "Hard",
+    "tags": [
+      "Graph",
+      "Topological Sort"
+    ],
+    "acceptanceRatePercent": 36,
+    "description": "Return the order of characters in an alien language.",
+    "examples": [
+      {
+        "i": "[\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
+        "o": "\"wertf\""
+      }
+    ],
+    "constraints": [
+      "1≤words.length≤100"
+    ],
+    "testCases": [
+      {
+        "i": "[\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
+        "o": "\"wertf\""
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 44,
+    "title": "Palindrome Partitioning",
+    "difficulty": "Medium",
+    "tags": [
+      "String",
+      "DP",
+      "Backtracking"
+    ],
+    "acceptanceRatePercent": 44,
+    "description": "Partition s such that every substring is a palindrome.",
+    "examples": [
+      {
+        "i": "\"aab\"",
+        "o": "[ [\"a\",\"a\",\"b\"], [\"aa\",\"b\"] ]"
+      }
+    ],
+    "constraints": [
+      "1≤s.length≤16"
+    ],
+    "testCases": [
+      {
+        "i": "\"aab\"",
+        "o": "[ [\"a\",\"a\",\"b\"], [\"aa\",\"b\"] ]",
+        "unordered": true
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 45,
+    "title": "N-Queens",
+    "difficulty": "Hard",
+    "tags": [
+      "Array",
+      "Backtracking"
+    ],
+    "acceptanceRatePercent": 40,
+    "description": "Place n queens on an n×n board so no two attack each other.",
+    "examples": [
+      {
+        "i": "n=4",
+        "o": "2 solutions"
+      }
+    ],
+    "constraints": [
+      "1≤n≤9"
+    ],
+    "testCases": [
+      {
+        "i": "4",
+        "o": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]",
+        "unordered": true
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 46,
+    "title": "Sudoku Solver",
+    "difficulty": "Hard",
+    "tags": [
+      "Array",
+      "Backtracking",
+      "Matrix"
+    ],
+    "acceptanceRatePercent": 35,
+    "description": "Solve a Sudoku puzzle by filling the empty cells.",
+    "examples": [
+      {
+        "i": "partially filled 9×9 grid",
+        "o": "solved grid"
+      }
+    ],
+    "constraints": [
+      "board[i][j] is digit or '.'"
+    ],
+    "testCases": [
+      {
+        "i": "{\"board\":[[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]}",
+        "o": "{\"board\":[[\"5\",\"3\",\"4\",\"6\",\"7\",\"8\",\"9\",\"1\",\"2\"],[\"6\",\"7\",\"2\",\"1\",\"9\",\"5\",\"3\",\"4\",\"8\"],[\"1\",\"9\",\"8\",\"3\",\"4\",\"2\",\"5\",\"6\",\"7\"],[\"8\",\"5\",\"9\",\"7\",\"6\",\"1\",\"4\",\"2\",\"3\"],[\"4\",\"2\",\"6\",\"8\",\"5\",\"3\",\"7\",\"9\",\"1\"],[\"7\",\"1\",\"3\",\"9\",\"2\",\"4\",\"8\",\"5\",\"6\"],[\"9\",\"6\",\"1\",\"5\",\"3\",\"7\",\"2\",\"8\",\"4\"],[\"2\",\"8\",\"7\",\"4\",\"1\",\"9\",\"6\",\"3\",\"5\"],[\"3\",\"4\",\"5\",\"2\",\"8\",\"6\",\"1\",\"7\",\"9\"]]}"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 47,
+    "title": "Merge k Sorted Lists",
+    "difficulty": "Hard",
+    "tags": [
+      "Linked List",
+      "Heap",
+      "Divide & Conquer"
+    ],
+    "acceptanceRatePercent": 47,
+    "description": "Merge k sorted linked lists into one sorted list.",
+    "examples": [
+      {
+        "i": "[[1,4,5],[1,3,4],[2,6]]",
+        "o": "[1,1,2,3,4,4,5,6]"
+      }
+    ],
+    "constraints": [
+      "0≤k≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[[1,4,5],[1,3,4],[2,6]]",
+        "o": "[1,1,2,3,4,4,5,6]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 48,
+    "title": "Word Break",
+    "difficulty": "Medium",
+    "tags": [
+      "Hash Table",
+      "String",
+      "DP"
+    ],
+    "acceptanceRatePercent": 45,
+    "description": "Determine if s can be segmented into words from wordDict.",
+    "examples": [
+      {
+        "i": "s=\"leetcode\", wordDict=[\"leet\",\"code\"]",
+        "o": "true"
+      }
+    ],
+    "constraints": [
+      "1≤s.length≤300"
+    ],
+    "testCases": [
+      {
+        "i": "\"leetcode\",[\"leet\",\"code\"]",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 49,
+    "title": "Decode Ways",
+    "difficulty": "Medium",
+    "tags": [
+      "String",
+      "DP"
+    ],
+    "acceptanceRatePercent": 32,
+    "description": "Count the number of ways to decode a string of digits into letters.",
+    "examples": [
+      {
+        "i": "\"12\"",
+        "o": "2",
+        "e": "AB or L"
+      },
+      {
+        "i": "\"226\"",
+        "o": "3"
+      }
+    ],
+    "constraints": [
+      "1≤s.length≤100"
+    ],
+    "testCases": [
+      {
+        "i": "\"12\"",
+        "o": "2"
+      },
+      {
+        "i": "\"226\"",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 50,
+    "title": "House Robber",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "DP"
+    ],
+    "acceptanceRatePercent": 49,
+    "description": "Rob houses to maximize money without robbing adjacent ones.",
+    "examples": [
+      {
+        "i": "[1,2,3,1]",
+        "o": "4"
+      },
+      {
+        "i": "[2,7,9,3,1]",
+        "o": "12"
+      }
+    ],
+    "constraints": [
+      "1≤nums.length≤100"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3,1]",
+        "o": "4"
+      },
+      {
+        "i": "[2,7,9,3,1]",
+        "o": "12"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 51,
+    "title": "House Robber II",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "DP"
+    ],
+    "acceptanceRatePercent": 41,
+    "description": "Houses are in a circle. Maximize robbery without robbing adjacent.",
+    "examples": [
+      {
+        "i": "[2,3,2]",
+        "o": "3"
+      },
+      {
+        "i": "[1,2,3,1]",
+        "o": "4"
+      }
+    ],
+    "constraints": [
+      "1≤n≤100"
+    ],
+    "testCases": [
+      {
+        "i": "[2,3,2]",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 52,
+    "title": "Longest Increasing Subsequence",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "DP",
+      "Binary Search"
+    ],
+    "acceptanceRatePercent": 53,
+    "description": "Find the length of the longest strictly increasing subsequence.",
+    "examples": [
+      {
+        "i": "[10,9,2,5,3,7,101,18]",
+        "o": "4",
+        "e": "[2,3,7,101]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤2500"
+    ],
+    "testCases": [
+      {
+        "i": "[10,9,2,5,3,7,101,18]",
+        "o": "4"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 53,
+    "title": "Edit Distance",
+    "difficulty": "Hard",
+    "tags": [
+      "String",
+      "DP"
+    ],
+    "acceptanceRatePercent": 55,
+    "description": "Find the minimum number of operations to convert word1 to word2.",
+    "examples": [
+      {
+        "i": "\"horse\",\"rorse\"",
+        "o": "3"
+      },
+      {
+        "i": "\"intention\",\"execution\"",
+        "o": "5"
+      }
+    ],
+    "constraints": [
+      "0≤word1.length,word2.length≤500"
+    ],
+    "testCases": [
+      {
+        "i": "\"horse\",\"rorse\"",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 54,
+    "title": "Maximal Square",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "DP",
+      "Matrix"
+    ],
+    "acceptanceRatePercent": 44,
+    "description": "Find the largest square containing only 1s in a binary matrix.",
+    "examples": [
+      {
+        "i": "[ [\"1\",\"0\",\"1\",\"0\"],[\"1\",\"0\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\"] ]",
+        "o": "4"
+      }
+    ],
+    "constraints": [
+      "1≤m,n≤300"
+    ],
+    "testCases": [
+      {
+        "i": "{\"matrix\":[[\"1\",\"0\",\"1\",\"0\"],[\"1\",\"0\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\"]]}",
+        "o": "4"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 55,
+    "title": "Counting Bits",
+    "difficulty": "Easy",
+    "tags": [
+      "DP",
+      "Bit Manipulation"
+    ],
+    "acceptanceRatePercent": 75,
+    "description": "Return array where ans[i] is the number of 1s in binary of i.",
+    "examples": [
+      {
+        "i": "n=2",
+        "o": "[0,1,1]"
+      },
+      {
+        "i": "n=5",
+        "o": "[0,1,1,2,1,2]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "5",
+        "o": "[0,1,1,2,1,2]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 56,
+    "title": "Missing Number",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "Math",
+      "Bit Manipulation"
+    ],
+    "acceptanceRatePercent": 66,
+    "description": "Find the missing number in range [0,n].",
+    "examples": [
+      {
+        "i": "[3,0,1]",
+        "o": "2"
+      },
+      {
+        "i": "[0,1]",
+        "o": "2"
+      }
+    ],
+    "constraints": [
+      "n==nums.length",
+      "All nums distinct"
+    ],
+    "testCases": [
+      {
+        "i": "[3,0,1]",
+        "o": "2"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 57,
+    "title": "Reverse Bits",
+    "difficulty": "Easy",
+    "tags": [
+      "Bit Manipulation",
+      "Divide & Conquer"
+    ],
+    "acceptanceRatePercent": 55,
+    "description": "Reverse bits of a 32-bit unsigned integer.",
+    "examples": [
+      {
+        "i": "00000010100101000001111010011100",
+        "o": "00111001011110000010100101000000"
+      }
+    ],
+    "constraints": [
+      "32-bit integer"
+    ],
+    "testCases": [
+      {
+        "i": "43261596",
+        "o": "964176192"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 58,
+    "title": "Number of 1 Bits",
+    "difficulty": "Easy",
+    "tags": [
+      "Bit Manipulation"
+    ],
+    "acceptanceRatePercent": 73,
+    "description": "Return the number of set bits in a 32-bit unsigned integer (Hamming weight).",
+    "examples": [
+      {
+        "i": "00000000000000000000000000001011",
+        "o": "3"
+      }
+    ],
+    "constraints": [
+      "32-bit integer"
+    ],
+    "testCases": [
+      {
+        "i": "11",
+        "o": "3"
+      },
+      {
+        "i": "128",
+        "o": "1"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 59,
+    "title": "Power of Two",
+    "difficulty": "Easy",
+    "tags": [
+      "Math",
+      "Bit Manipulation",
+      "Recursion"
+    ],
+    "acceptanceRatePercent": 45,
+    "description": "Given an integer n, return true if it is a power of two.",
+    "examples": [
+      {
+        "i": "n=1",
+        "o": "true"
+      },
+      {
+        "i": "n=16",
+        "o": "true"
+      },
+      {
+        "i": "n=3",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "-2³¹≤n≤2³¹-1"
+    ],
+    "testCases": [
+      {
+        "i": "16",
+        "o": "true"
+      },
+      {
+        "i": "3",
+        "o": "false"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 60,
+    "title": "Happy Number",
+    "difficulty": "Easy",
+    "tags": [
+      "Hash Table",
+      "Math",
+      "Two Pointers"
+    ],
+    "acceptanceRatePercent": 54,
+    "description": "A happy number eventually reaches 1 by replacing the number with the sum of squares of its digits.",
+    "examples": [
+      {
+        "i": "n=19",
+        "o": "true"
+      },
+      {
+        "i": "n=2",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "1≤n≤2³¹-1"
+    ],
+    "testCases": [
+      {
+        "i": "19",
+        "o": "true"
+      },
+      {
+        "i": "2",
+        "o": "false"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 61,
+    "title": "Palindrome Number",
+    "difficulty": "Easy",
+    "tags": [
+      "Math"
+    ],
+    "acceptanceRatePercent": 53,
+    "description": "Determine whether an integer is a palindrome without string conversion.",
+    "examples": [
+      {
+        "i": "x=121",
+        "o": "true"
+      },
+      {
+        "i": "x=-121",
+        "o": "false"
+      },
+      {
+        "i": "x=10",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "-2³¹≤x≤2³¹-1"
+    ],
+    "testCases": [
+      {
+        "i": "121",
+        "o": "true"
+      },
+      {
+        "i": "-121",
+        "o": "false"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 62,
+    "title": "Roman to Integer",
+    "difficulty": "Easy",
+    "tags": [
+      "Hash Table",
+      "Math",
+      "String"
+    ],
+    "acceptanceRatePercent": 59,
+    "description": "Convert a Roman numeral string to an integer.",
+    "examples": [
+      {
+        "i": "\"III\"",
+        "o": "3"
+      },
+      {
+        "i": "\"LVIII\"",
+        "o": "58"
+      },
+      {
+        "i": "\"MCMXCIV\"",
+        "o": "1994"
+      }
+    ],
+    "constraints": [
+      "1≤s.length≤15"
+    ],
+    "testCases": [
+      {
+        "i": "\"III\"",
+        "o": "3"
+      },
+      {
+        "i": "\"MCMXCIV\"",
+        "o": "1994"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 63,
+    "title": "Integer to Roman",
+    "difficulty": "Medium",
+    "tags": [
+      "Hash Table",
+      "Math",
+      "String"
+    ],
+    "acceptanceRatePercent": 63,
+    "description": "Convert an integer to a Roman numeral string.",
+    "examples": [
+      {
+        "i": "num=3",
+        "o": "\"III\""
+      },
+      {
+        "i": "num=1994",
+        "o": "\"MCMXCIV\""
+      }
+    ],
+    "constraints": [
+      "1≤num≤3999"
+    ],
+    "testCases": [
+      {
+        "i": "3749",
+        "o": "\"MMMDCCXLIX\""
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 64,
+    "title": "Fizz Buzz",
+    "difficulty": "Easy",
+    "tags": [
+      "Math",
+      "String",
+      "Simulation"
+    ],
+    "acceptanceRatePercent": 67,
+    "description": "Return FizzBuzz array for numbers 1 to n.",
+    "examples": [
+      {
+        "i": "n=3",
+        "o": "[\"1\",\"2\",\"Fizz\"]"
+      },
+      {
+        "i": "n=5",
+        "o": "[\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\"]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "5",
+        "o": "[\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\"]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 65,
+    "title": "Pascal's Triangle",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "DP"
+    ],
+    "acceptanceRatePercent": 71,
+    "description": "Return the first numRows rows of Pascal's triangle.",
+    "examples": [
+      {
+        "i": "numRows=5",
+        "o": "[[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]"
+      }
+    ],
+    "constraints": [
+      "1≤numRows≤30"
+    ],
+    "testCases": [
+      {
+        "i": "5",
+        "o": "[[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 66,
+    "title": "Plus One",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "Math"
+    ],
+    "acceptanceRatePercent": 43,
+    "description": "Increment a large integer represented as an array of digits.",
+    "examples": [
+      {
+        "i": "[1,2,3]",
+        "o": "[1,2,4]"
+      },
+      {
+        "i": "[9,9,9]",
+        "o": "[1,0,0,0]"
+      }
+    ],
+    "constraints": [
+      "1≤digits.length≤100"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3]",
+        "o": "[1,2,4]"
+      },
+      {
+        "i": "[9,9,9]",
+        "o": "[1,0,0,0]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 67,
+    "title": "Move Zeroes",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "Two Pointers"
+    ],
+    "acceptanceRatePercent": 61,
+    "description": "Move all zeros to the end while maintaining relative order.",
+    "examples": [
+      {
+        "i": "[0,1,0,3,12]",
+        "o": "[1,3,12,0,0]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[0,1,0,3,12]",
+        "o": "[1,3,12,0,0]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 68,
+    "title": "Find All Duplicates in an Array",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Hash Table"
+    ],
+    "acceptanceRatePercent": 73,
+    "description": "Find all elements that appear twice in an array without extra space.",
+    "examples": [
+      {
+        "i": "[4,3,2,7,8,2,3,1]",
+        "o": "[2,3]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁵",
+      "1≤a[i]≤n"
+    ],
+    "testCases": [
+      {
+        "i": "[4,3,2,7,8,2,3,1]",
+        "o": "[2,3]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 69,
+    "title": "Majority Element",
+    "difficulty": "Easy",
+    "tags": [
+      "Array",
+      "Hash Table",
+      "Divide & Conquer"
+    ],
+    "acceptanceRatePercent": 64,
+    "description": "Find the element that appears more than n/2 times.",
+    "examples": [
+      {
+        "i": "[3,2,3]",
+        "o": "3"
+      },
+      {
+        "i": "[2,2,1,1,1,2,2]",
+        "o": "2"
+      }
+    ],
+    "constraints": [
+      "1≤n≤5×10⁴",
+      "Majority always exists"
+    ],
+    "testCases": [
+      {
+        "i": "[3,2,3]",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 70,
+    "title": "Sort Colors",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Two Pointers",
+      "Sorting"
+    ],
+    "acceptanceRatePercent": 57,
+    "description": "Sort array of 0s, 1s, 2s in-place (Dutch National Flag).",
+    "examples": [
+      {
+        "i": "[2,0,2,1,1,0]",
+        "o": "[0,0,1,1,2,2]"
+      },
+      {
+        "i": "[2,0,1]",
+        "o": "[0,1,2]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤300",
+      "a[i] is 0, 1, or 2"
+    ],
+    "testCases": [
+      {
+        "i": "[2,0,2,1,1,0]",
+        "o": "[0,0,1,1,2,2]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 71,
+    "title": "Minimum Size Subarray Sum",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Binary Search",
+      "Sliding Window"
+    ],
+    "acceptanceRatePercent": 44,
+    "description": "Find the minimum length subarray with sum ≥ target.",
+    "examples": [
+      {
+        "i": "target=7, nums=[2,3,1,2,4,3]",
+        "o": "2",
+        "e": "[4,3]"
+      }
+    ],
+    "constraints": [
+      "1≤target≤10⁹",
+      "1≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "7, [2,3,1,2,4,3]",
+        "o": "2"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 72,
+    "title": "Longest Substring Without Repeating Characters",
+    "difficulty": "Medium",
+    "tags": [
+      "Hash Table",
+      "String",
+      "Sliding Window"
+    ],
+    "acceptanceRatePercent": 33,
+    "description": "Find the length of the longest substring without repeating characters.",
+    "examples": [
+      {
+        "i": "\"abcabcbb\"",
+        "o": "3"
+      },
+      {
+        "i": "\"bbbbb\"",
+        "o": "1"
+      }
+    ],
+    "constraints": [
+      "0≤s.length≤5×10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "\"abcabcbb\"",
+        "o": "3"
+      },
+      {
+        "i": "\"pwwkew\"",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 73,
+    "title": "Find Median from Data Stream",
+    "difficulty": "Hard",
+    "tags": [
+      "Heap",
+      "Sorting",
+      "Design"
+    ],
+    "acceptanceRatePercent": 52,
+    "description": "Design a data structure to find the median from a stream of numbers.",
+    "examples": [
+      {
+        "i": "addNum(1), addNum(2), findMedian() → 1.5, addNum(3), findMedian() → 2",
+        "o": "1.5, 2"
+      }
+    ],
+    "constraints": [
+      "−10⁵≤num≤10⁵",
+      "At most 5×10⁴ calls"
+    ],
+    "testCases": [
+      {
+        "i": "{\"operations\":[\"addNum\",\"addNum\",\"findMedian\",\"addNum\",\"findMedian\"],\"values\":[1,2,null,3,null]}",
+        "o": "[null,null,1.5,null,2]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 74,
+    "title": "Sliding Window Maximum",
+    "difficulty": "Hard",
+    "tags": [
+      "Array",
+      "Queue",
+      "Sliding Window"
+    ],
+    "acceptanceRatePercent": 46,
+    "description": "Find the maximum in every sliding window of size k.",
+    "examples": [
+      {
+        "i": "nums=[1,3,-1,-3,5,3,6,7], k=3",
+        "o": "[3,3,5,5,6,7]"
+      }
+    ],
+    "constraints": [
+      "1≤nums.length≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[1,3,-1,-3,5,3,6,7], 3",
+        "o": "[3,3,5,5,6,7]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 75,
+    "title": "Longest Common Subsequence",
+    "difficulty": "Medium",
+    "tags": [
+      "String",
+      "DP"
+    ],
+    "acceptanceRatePercent": 43,
+    "description": "Find the length of the longest common subsequence of two strings.",
+    "examples": [
+      {
+        "i": "\"abcde\",\"ace\"",
+        "o": "3",
+        "e": "LCS is ace"
+      },
+      {
+        "i": "\"abc\",\"abc\"",
+        "o": "3"
+      }
+    ],
+    "constraints": [
+      "1≤m,n≤1000"
+    ],
+    "testCases": [
+      {
+        "i": "\"abcde\",\"ace\"",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 76,
+    "title": "Regular Expression Matching",
+    "difficulty": "Hard",
+    "tags": [
+      "String",
+      "DP",
+      "Recursion"
+    ],
+    "acceptanceRatePercent": 28,
+    "description": "Implement regex matching with '.' and '*'.",
+    "examples": [
+      {
+        "i": "s=\"aa\", p=\"a\"",
+        "o": "false"
+      },
+      {
+        "i": "s=\"aa\", p=\"a*\"",
+        "o": "true"
+      }
+    ],
+    "constraints": [
+      "1≤s.length≤20",
+      "1≤p.length≤20"
+    ],
+    "testCases": [
+      {
+        "i": "\"aa\",\"a*\"",
+        "o": "true"
+      },
+      {
+        "i": "\"ab\",\".*\"",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 77,
+    "title": "Wildcard Matching",
+    "difficulty": "Hard",
+    "tags": [
+      "String",
+      "DP",
+      "Greedy"
+    ],
+    "acceptanceRatePercent": 27,
+    "description": "Implement wildcard pattern matching with '?' and '*'.",
+    "examples": [
+      {
+        "i": "s=\"aa\", p=\"a\"",
+        "o": "false"
+      },
+      {
+        "i": "s=\"aa\", p=\"*\"",
+        "o": "true"
+      }
+    ],
+    "constraints": [
+      "0≤s.length≤2000"
+    ],
+    "testCases": [
+      {
+        "i": "\"adceb\",\"*a*b\"",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 78,
+    "title": "Longest Common Prefix",
+    "difficulty": "Easy",
+    "tags": [
+      "String",
+      "Trie"
+    ],
+    "acceptanceRatePercent": 40,
+    "description": "Find the longest common prefix string among an array of strings.",
+    "examples": [
+      {
+        "i": "[\"flower\",\"flow\",\"flight\"]",
+        "o": "\"fl\""
+      },
+      {
+        "i": "[\"dog\",\"racecar\",\"car\"]",
+        "o": "\"\""
+      }
+    ],
+    "constraints": [
+      "1≤strs.length≤200"
+    ],
+    "testCases": [
+      {
+        "i": "[\"flower\",\"flow\",\"flight\"]",
+        "o": "\"fl\""
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 79,
+    "title": "Valid Anagram",
+    "difficulty": "Easy",
+    "tags": [
+      "Hash Table",
+      "String",
+      "Sorting"
+    ],
+    "acceptanceRatePercent": 62,
+    "description": "Determine if two strings are anagrams of each other.",
+    "examples": [
+      {
+        "i": "\"anagram\",\"nagaram\"",
+        "o": "true"
+      },
+      {
+        "i": "\"rat\",\"car\"",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "1≤s.length,t.length≤5×10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "\"anagram\",\"nagaram\"",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 80,
+    "title": "Count and Say",
+    "difficulty": "Medium",
+    "tags": [
+      "String"
+    ],
+    "acceptanceRatePercent": 52,
+    "description": "Generate the nth term of the count-and-say sequence.",
+    "examples": [
+      {
+        "i": "n=1",
+        "o": "\"1\""
+      },
+      {
+        "i": "n=4",
+        "o": "\"1211\""
+      }
+    ],
+    "constraints": [
+      "1≤n≤30"
+    ],
+    "testCases": [
+      {
+        "i": "4",
+        "o": "\"1211\""
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 81,
+    "title": "Implement Queue using Stacks",
+    "difficulty": "Easy",
+    "tags": [
+      "Stack",
+      "Queue",
+      "Design"
+    ],
+    "acceptanceRatePercent": 64,
+    "description": "Implement a FIFO queue using only two stacks.",
+    "examples": [
+      {
+        "i": "push(1),push(2),peek()→1,pop()→1,empty()→false",
+        "o": "correct FIFO order"
+      }
+    ],
+    "constraints": [
+      "1≤x≤9",
+      "At most 100 calls"
+    ],
+    "testCases": [
+      {
+        "i": "push(1),push(2),pop()",
+        "o": "1"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 82,
+    "title": "Implement Stack using Queues",
+    "difficulty": "Easy",
+    "tags": [
+      "Stack",
+      "Queue",
+      "Design"
+    ],
+    "acceptanceRatePercent": 57,
+    "description": "Implement a LIFO stack using only two queues.",
+    "examples": [
+      {
+        "i": "push(1),push(2),top()→2,pop()→2,empty()→false",
+        "o": "correct LIFO order"
+      }
+    ],
+    "constraints": [
+      "1≤x≤9"
+    ],
+    "testCases": [
+      {
+        "i": "push(1),push(2),pop()",
+        "o": "2"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 83,
+    "title": "Flatten Binary Tree to Linked List",
+    "difficulty": "Medium",
+    "tags": [
+      "Linked List",
+      "Tree",
+      "DFS"
+    ],
+    "acceptanceRatePercent": 61,
+    "description": "Flatten a binary tree into a linked list in-place in preorder.",
+    "examples": [
+      {
+        "i": "[1,2,5,3,4,null,6]",
+        "o": "[1,null,2,null,3,null,4,null,5,null,6]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤2000"
+    ],
+    "testCases": [
+      {
+        "i": "{\"root\":[1,2,5,3,4,null,6]}",
+        "o": "[1,null,2,null,3,null,4,null,5,null,6]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 84,
+    "title": "Path Sum",
+    "difficulty": "Easy",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 46,
+    "description": "Check if tree has a root-to-leaf path equal to target sum.",
+    "examples": [
+      {
+        "i": "[5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum=22",
+        "o": "true"
+      }
+    ],
+    "constraints": [
+      "0≤n≤5000"
+    ],
+    "testCases": [
+      {
+        "i": "{\"root\":[5,4,8,11,null,13,4,7,2,null,null,null,1],\"targetSum\":22}",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 85,
+    "title": "Sum Root to Leaf Numbers",
+    "difficulty": "Medium",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 61,
+    "description": "Find total sum of all root-to-leaf numbers.",
+    "examples": [
+      {
+        "i": "[1,2,3]",
+        "o": "25",
+        "e": "12+13=25"
+      },
+      {
+        "i": "[4,9,0,5,1]",
+        "o": "1026"
+      }
+    ],
+    "constraints": [
+      "1≤n≤1000"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3]",
+        "o": "25"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 86,
+    "title": "Binary Tree Right Side View",
+    "difficulty": "Medium",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 64,
+    "description": "Return the values visible from the right side of a binary tree.",
+    "examples": [
+      {
+        "i": "[1,2,3,null,5,null,4]",
+        "o": "[1,3,4]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤100"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3,null,5,null,4]",
+        "o": "[1,3,4]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 87,
+    "title": "Construct Binary Tree from Inorder and Postorder",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Hash Table",
+      "Tree",
+      "Divide & Conquer"
+    ],
+    "acceptanceRatePercent": 56,
+    "description": "Construct binary tree from inorder and postorder traversal arrays.",
+    "examples": [
+      {
+        "i": "inorder=[9,3,15,20,7], postorder=[9,15,7,20,3]",
+        "o": "[3,9,20,null,null,15,7]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤3000"
+    ],
+    "testCases": [
+      {
+        "i": "{\"inorder\":[9,3,15,20,7],\"postorder\":[9,15,7,20,3]}",
+        "o": "[3,9,20,null,null,15,7]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 88,
+    "title": "Populating Next Right Pointers",
+    "difficulty": "Medium",
+    "tags": [
+      "Linked List",
+      "Tree",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 58,
+    "description": "Populate each next pointer to point to the next right node.",
+    "examples": [
+      {
+        "i": "[1,2,3,4,5,6,7]",
+        "o": "[1,#,2,3,#,4,5,6,7,#]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤2¹²-1",
+      "Perfect binary tree"
+    ],
+    "testCases": [
+      {
+        "i": "{\"root\":[1,2,3,4,5,6,7]}",
+        "o": "[[1],[2,3],[4,5,6,7]]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 89,
+    "title": "Lowest Common Ancestor of BST",
+    "difficulty": "Easy",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BST"
+    ],
+    "acceptanceRatePercent": 62,
+    "description": "Find the lowest common ancestor of two nodes in a BST.",
+    "examples": [
+      {
+        "i": "root=[6,2,8,0,4,7,9], p=2, q=8",
+        "o": "6"
+      },
+      {
+        "i": "p=2,q=4",
+        "o": "2"
+      }
+    ],
+    "constraints": [
+      "2≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "{\"root\":[6,2,8,0,4,7,9],\"p\":2,\"q\":8}",
+        "o": "6"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 90,
+    "title": "Kth Smallest Element in BST",
+    "difficulty": "Medium",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BST"
+    ],
+    "acceptanceRatePercent": 69,
+    "description": "Find the kth smallest element in a BST.",
+    "examples": [
+      {
+        "i": "root=[3,1,4,null,2], k=1",
+        "o": "1"
+      },
+      {
+        "i": "[5,3,6,2,4,null,null,1], k=3",
+        "o": "3"
+      }
+    ],
+    "constraints": [
+      "1≤k≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[3,1,4,null,2], 1",
+        "o": "1"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 91,
+    "title": "Invert Binary Tree",
+    "difficulty": "Easy",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 75,
+    "description": "Invert a binary tree.",
+    "examples": [
+      {
+        "i": "[4,2,7,1,3,6,9]",
+        "o": "[4,7,2,9,6,3,1]"
+      }
+    ],
+    "constraints": [
+      "0≤n≤100"
+    ],
+    "testCases": [
+      {
+        "i": "[4,2,7,1,3,6,9]",
+        "o": "[4,7,2,9,6,3,1]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 92,
+    "title": "Diameter of Binary Tree",
+    "difficulty": "Easy",
+    "tags": [
+      "Tree",
+      "DFS"
+    ],
+    "acceptanceRatePercent": 58,
+    "description": "Find the length of the diameter of a binary tree.",
+    "examples": [
+      {
+        "i": "[1,2,3,4,5]",
+        "o": "3",
+        "e": "path [4,2,1,3] or [5,2,1,3]"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3,4,5]",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 93,
+    "title": "Balanced Binary Tree",
+    "difficulty": "Easy",
+    "tags": [
+      "Tree",
+      "DFS"
+    ],
+    "acceptanceRatePercent": 48,
+    "description": "Determine if a binary tree is height-balanced.",
+    "examples": [
+      {
+        "i": "[3,9,20,null,null,15,7]",
+        "o": "true"
+      },
+      {
+        "i": "[1,2,2,3,3,null,null,4,4]",
+        "o": "false"
+      }
+    ],
+    "constraints": [
+      "0≤n≤5000"
+    ],
+    "testCases": [
+      {
+        "i": "[3,9,20,null,null,15,7]",
+        "o": "true"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 94,
+    "title": "Count Good Nodes in Binary Tree",
+    "difficulty": "Medium",
+    "tags": [
+      "Tree",
+      "DFS",
+      "BFS"
+    ],
+    "acceptanceRatePercent": 72,
+    "description": "Count nodes where no node in the path from root has a greater value.",
+    "examples": [
+      {
+        "i": "[3,1,4,3,null,1,5]",
+        "o": "4"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[3,1,4,3,null,1,5]",
+        "o": "4"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 95,
+    "title": "Implement Trie",
+    "difficulty": "Medium",
+    "tags": [
+      "Hash Table",
+      "String",
+      "Trie",
+      "Design"
+    ],
+    "acceptanceRatePercent": 63,
+    "description": "Implement a Trie (prefix tree) with insert, search, and startsWith.",
+    "examples": [
+      {
+        "i": "insert('apple'), search('apple')→true, search('app')→false, startsWith('app')→true",
+        "o": "correct"
+      }
+    ],
+    "constraints": [
+      "1≤word.length≤2000"
+    ],
+    "testCases": [
+      {
+        "i": "{\"operations\":[\"insert\",\"search\",\"search\",\"startsWith\"],\"arguments\":[[\"apple\"],[\"apple\"],[\"app\"],[\"app\"]]}",
+        "o": "[null,true,false,true]"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 96,
+    "title": "Find Duplicate Number",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Two Pointers",
+      "Binary Search"
+    ],
+    "acceptanceRatePercent": 59,
+    "description": "Find the duplicate number in an array containing n+1 integers from 1 to n.",
+    "examples": [
+      {
+        "i": "[1,3,4,2,2]",
+        "o": "2"
+      },
+      {
+        "i": "[3,1,3,4,2]",
+        "o": "3"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁵",
+      "Only one repeated number"
+    ],
+    "testCases": [
+      {
+        "i": "[1,3,4,2,2]",
+        "o": "2"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 97,
+    "title": "First Missing Positive",
+    "difficulty": "Hard",
+    "tags": [
+      "Array",
+      "Hash Table"
+    ],
+    "acceptanceRatePercent": 37,
+    "description": "Find the smallest missing positive integer in O(n) time and O(1) space.",
+    "examples": [
+      {
+        "i": "[1,2,0]",
+        "o": "3"
+      },
+      {
+        "i": "[3,4,-1,1]",
+        "o": "2"
+      },
+      {
+        "i": "[7,8,9,11,12]",
+        "o": "1"
+      }
+    ],
+    "constraints": [
+      "1≤n≤5×10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,0]",
+        "o": "3"
+      },
+      {
+        "i": "[3,4,-1,1]",
+        "o": "2"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 98,
+    "title": "Gas Station",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Greedy"
+    ],
+    "acceptanceRatePercent": 45,
+    "description": "Find the starting gas station index to complete the circuit, or -1.",
+    "examples": [
+      {
+        "i": "gas=[1,2,3,4,5], cost=[3,4,5,1,2]",
+        "o": "3"
+      },
+      {
+        "i": "gas=[2,3,4], cost=[3,4,3]",
+        "o": "-1"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁵"
+    ],
+    "testCases": [
+      {
+        "i": "[1,2,3,4,5],[3,4,5,1,2]",
+        "o": "3"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 99,
+    "title": "Task Scheduler",
+    "difficulty": "Medium",
+    "tags": [
+      "Array",
+      "Greedy",
+      "Heap"
+    ],
+    "acceptanceRatePercent": 56,
+    "description": "Find minimum intervals needed to finish tasks with cooldown n.",
+    "examples": [
+      {
+        "i": "tasks=['A','A','A','B','B','B'], n=2",
+        "o": "8"
+      },
+      {
+        "i": "tasks=['A','A','A','B','B','B'], n=0",
+        "o": "6"
+      }
+    ],
+    "constraints": [
+      "1≤tasks.length≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "['A','A','A','B','B','B'], 2",
+        "o": "8"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  },
+  {
+    "id": 100,
+    "title": "Largest Rectangle in Histogram",
+    "difficulty": "Hard",
+    "tags": [
+      "Array",
+      "Stack"
+    ],
+    "acceptanceRatePercent": 43,
+    "description": "Find the area of the largest rectangle in a histogram.",
+    "examples": [
+      {
+        "i": "[2,1,5,6,2,3]",
+        "o": "10",
+        "e": "rectangle from bar 3 to 4 with height 5"
+      },
+      {
+        "i": "[2,4]",
+        "o": "4"
+      }
+    ],
+    "constraints": [
+      "1≤n≤10⁵",
+      "0≤heights[i]≤10⁴"
+    ],
+    "testCases": [
+      {
+        "i": "[2,1,5,6,2,3]",
+        "o": "10"
+      }
+    ],
+    "starterCode": {
+      "python": "def solution():\n    # Write your solution here\n    pass\n",
+      "javascript": "var solution = function() {\n    // Write your solution here\n};\n",
+      "java": "class Solution {\n    public void solution() {\n        // Write your solution here\n    }\n}\n",
+      "cpp": "class Solution {\npublic:\n    void solution() {\n        // Write your solution here\n    }\n};\n",
+      "c": "void solution() {\n    // Write your solution here\n}\n"
+    }
+  }
+]

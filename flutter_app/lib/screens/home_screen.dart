@@ -1,236 +1,258 @@
 import 'package:flutter/material.dart';
 
+import '../config/api_config.dart';
 import '../models/problem.dart';
+import '../services/problem_repository.dart';
+import '../state/auth_controller.dart';
+import '../widgets/arena_widgets.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final ProblemRepository repository;
+  final AuthController authController;
+  final VoidCallback onProblems;
+  final VoidCallback onEditor;
+  final VoidCallback onDebugging;
+  final VoidCallback onLeaderboard;
+  final VoidCallback onProfile;
 
-  static const List<Problem> _sampleProblems = [
-    Problem(
-      id: 1,
-      title: 'Two Sum',
-      difficulty: 'Easy',
-      tags: ['Array', 'Hash Map'],
-      accepted: 78,
-      solved: true,
-    ),
-    Problem(
-      id: 2,
-      title: 'Median of Two Arrays',
-      difficulty: 'Hard',
-      tags: ['Binary Search', 'Array'],
-      accepted: 38,
-      solved: false,
-    ),
-    Problem(
-      id: 3,
-      title: 'Valid Parentheses',
-      difficulty: 'Easy',
-      tags: ['String', 'Stack'],
-      accepted: 71,
-      solved: true,
-    ),
-    Problem(
-      id: 4,
-      title: 'Longest Palindromic Substring',
-      difficulty: 'Medium',
-      tags: ['String', 'DP'],
-      accepted: 54,
-      solved: false,
-    ),
-  ];
+  const HomeScreen({
+    super.key,
+    required this.repository,
+    required this.authController,
+    required this.onProblems,
+    required this.onEditor,
+    required this.onDebugging,
+    required this.onLeaderboard,
+    required this.onProfile,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('CodeArena'),
-        backgroundColor: const Color(0xFF111318),
-        foregroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: const Text('Problems'),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('Leaderboard'),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 16),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF111318), Color(0xFF1A1D26)],
+  Widget build(BuildContext context) => AnimatedBuilder(
+        animation: authController,
+        builder: (context, _) => FutureBuilder<List<Problem>>(
+          future: repository.loadProblems(),
+          builder: (context, snapshot) {
+            final problems = snapshot.data ?? const <Problem>[];
+            return ListView(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 28),
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF10232F),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color(0xFF294350)),
                   ),
-                  border: Border.all(color: const Color(0xFF2A2D3A)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF04181B),
-                        borderRadius: BorderRadius.circular(999),
-                        border: Border.all(color: const Color(0xFF00E5FF)),
-                      ),
-                      child: const Text(
-                        '⚡ 100 Problems • Live Terminal',
-                        style: TextStyle(
-                          color: Color(0xFF00E5FF),
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12,
-                          letterSpacing: 0.8,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    const Text(
-                      'The Ultimate\nCode Arena',
-                      style: TextStyle(
-                        fontSize: 42,
-                        fontWeight: FontWeight.w800,
-                        height: 1.05,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'Practice competitive programming problems, compile code, and work through a terminal experience built for daily practice.',
-                      style: TextStyle(
-                        color: Color(0xFF94A3B8),
-                        fontSize: 16,
-                        height: 1.6,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Wrap(
-                      spacing: 12,
-                      runSpacing: 12,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FilledButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.code),
-                          label: const Text('Solve Problems'),
-                        ),
-                        OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.terminal),
-                          label: const Text('Open Terminal'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 28),
-              const Text(
-                'Featured Problems',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(height: 16),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: _sampleProblems.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 12),
-                itemBuilder: (context, index) {
-                  final problem = _sampleProblems[index];
-                  return Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF111318),
-                      borderRadius: BorderRadius.circular(18),
-                      border: Border.all(color: const Color(0xFF2A2D3A)),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '#${problem.id} ${problem.title}',
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Wrap(
-                                spacing: 6,
-                                runSpacing: 6,
-                                children: problem.tags
-                                    .map(
-                                      (tag) => Chip(
-                                        label: Text(tag),
-                                        visualDensity: VisualDensity.compact,
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ],
+                        Row(children: [
+                          Container(
+                            width: 42,
+                            height: 42,
+                            decoration: BoxDecoration(
+                                color: const Color(0xFF183B45),
+                                borderRadius: BorderRadius.circular(8)),
+                            child: const Icon(Icons.terminal,
+                                color: Color(0xFF55DCE5)),
                           ),
+                          const SizedBox(width: 12),
+                          const Text('CODEARENA',
+                              style: TextStyle(
+                                  color: Color(0xFF55DCE5),
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1.4)),
+                        ]),
+                        const SizedBox(height: 22),
+                        Text(
+                          authController.user == null
+                              ? 'Practice with purpose.'
+                              : 'Welcome back, ${authController.user!.username}.',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.w800),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: problem.difficulty == 'Easy'
-                                    ? const Color(0xFF123A2D)
-                                    : problem.difficulty == 'Medium'
-                                        ? const Color(0xFF47340F)
-                                        : const Color(0xFF3F1A1A),
-                                borderRadius: BorderRadius.circular(999),
-                              ),
-                              child: Text(
-                                problem.difficulty,
-                                style: TextStyle(
-                                  color: problem.difficulty == 'Easy'
-                                      ? const Color(0xFF34D399)
-                                      : problem.difficulty == 'Medium'
-                                          ? const Color(0xFFFBBF24)
-                                          : const Color(0xFFF87171),
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              '${problem.accepted}% accept',
-                              style: const TextStyle(
-                                color: Color(0xFF94A3B8),
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Work through the problem bank, edit code, and send real runs to a configured CodeArena backend.',
+                          style:
+                              TextStyle(color: Color(0xFFA8BBC5), height: 1.45),
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ],
+                        const SizedBox(height: 18),
+                        Wrap(spacing: 10, runSpacing: 10, children: [
+                          FilledButton.icon(
+                            key: const ValueKey('home-problems'),
+                            onPressed: onProblems,
+                            icon: const Icon(Icons.code),
+                            label: const Text('Problems'),
+                          ),
+                          OutlinedButton.icon(
+                              onPressed: onEditor,
+                              icon: const Icon(Icons.terminal),
+                              label: const Text('Compiler')),
+                        ]),
+                      ]),
+                ),
+                const SizedBox(height: 14),
+                if (ApiConfig.configurationError() != null)
+                  const ApiNotice(
+                      message:
+                          'Backend URL is not set. Browse bundled content; sign-in, Run, and Submit need API_BASE_URL.'),
+                const SizedBox(height: 18),
+                const SectionHeading(
+                    title: 'Your workspace', trailing: 'Native app'),
+                const SizedBox(height: 10),
+                Row(children: [
+                  Expanded(
+                      child: _Metric(
+                          label: 'Problems',
+                          value: snapshot.hasData ? '${problems.length}' : '…',
+                          icon: Icons.code)),
+                  const SizedBox(width: 10),
+                  const Expanded(
+                      child: _Metric(
+                          label: 'Languages',
+                          value: '5',
+                          icon: Icons.data_object)),
+                ]),
+                const SizedBox(height: 10),
+                Row(children: [
+                  Expanded(
+                      child: _ActionTile(
+                          title: 'Debugging Arena',
+                          subtitle: 'Find the bug',
+                          icon: Icons.bug_report_outlined,
+                          onTap: onDebugging)),
+                  const SizedBox(width: 10),
+                  Expanded(
+                      child: _ActionTile(
+                          title: 'Leaderboard',
+                          subtitle: 'Data status',
+                          icon: Icons.leaderboard_outlined,
+                          onTap: onLeaderboard)),
+                ]),
+                const SizedBox(height: 10),
+                _ActionTile(
+                    title: 'Profile & account',
+                    subtitle: 'Sign in or view local progress',
+                    icon: Icons.person_outline,
+                    onTap: onProfile),
+                const SizedBox(height: 24),
+                SectionHeading(
+                    title: 'From the problem bank',
+                    trailing: '${problems.length} entries'),
+                const SizedBox(height: 10),
+                if (snapshot.connectionState == ConnectionState.waiting &&
+                    !snapshot.hasData)
+                  const LoadingPane(label: 'Loading bundled problems')
+                else if (snapshot.hasError)
+                  const ApiNotice(
+                      message: 'Bundled problem data could not be loaded.',
+                      error: true)
+                else
+                  ...problems.take(3).map((problem) =>
+                      _FeaturedProblem(problem: problem, onTap: onProblems)),
+                const SizedBox(height: 6),
+                TextButton.icon(
+                    onPressed: onProblems,
+                    icon: const Icon(Icons.arrow_forward),
+                    label: const Text('Browse all problems')),
+              ],
+            );
+          },
+        ),
+      );
+}
+
+class _Metric extends StatelessWidget {
+  final String label;
+  final String value;
+  final IconData icon;
+
+  const _Metric({required this.label, required this.value, required this.icon});
+
+  @override
+  Widget build(BuildContext context) => Card(
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(children: [
+            Icon(icon, color: const Color(0xFF55DCE5), size: 20),
+            const SizedBox(width: 10),
+            Expanded(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  Text(value,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w800, fontSize: 20)),
+                  Text(label,
+                      style: const TextStyle(
+                          color: Color(0xFFA8BBC5), fontSize: 12)),
+                ])),
+          ]),
+        ),
+      );
+}
+
+class _ActionTile extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _ActionTile(
+      {required this.title,
+      required this.subtitle,
+      required this.icon,
+      required this.onTap});
+
+  @override
+  Widget build(BuildContext context) => Card(
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(8),
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Row(children: [
+              Icon(icon, color: const Color(0xFF55DCE5)),
+              const SizedBox(width: 12),
+              Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    Text(title,
+                        style: const TextStyle(fontWeight: FontWeight.w700)),
+                    Text(subtitle,
+                        style: const TextStyle(
+                            color: Color(0xFFA8BBC5), fontSize: 12)),
+                  ])),
+              const Icon(Icons.chevron_right, size: 18),
+            ]),
           ),
         ),
-      ),
-    );
-  }
+      );
+}
+
+class _FeaturedProblem extends StatelessWidget {
+  final Problem problem;
+  final VoidCallback onTap;
+
+  const _FeaturedProblem({required this.problem, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) => Card(
+        margin: const EdgeInsets.only(bottom: 8),
+        child: ListTile(
+          onTap: onTap,
+          leading: Text('#${problem.id}',
+              style: const TextStyle(
+                  color: Color(0xFF55DCE5), fontWeight: FontWeight.w700)),
+          title:
+              Text(problem.title, maxLines: 1, overflow: TextOverflow.ellipsis),
+          subtitle: Text(problem.tags.take(2).join(' · '),
+              maxLines: 1, overflow: TextOverflow.ellipsis),
+          trailing: DifficultyBadge(problem.difficulty),
+        ),
+      );
 }

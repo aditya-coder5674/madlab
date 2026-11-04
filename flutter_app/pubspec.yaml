@@ -1,4 +1,4 @@
-name: codearena_flutter
+name: codearena
 description: A Flutter app for CodeArena.
 publish_to: 'none'
 version: 1.0.0+1
@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  dio: ^5.8.0+1
+  flutter_secure_storage: ^9.2.4
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +21,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/data/problems.json
+    - assets/data/debugging_questions.json
