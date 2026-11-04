@@ -40,6 +40,7 @@ const CODEARENA_RUN_TIMEOUT_MS = Number.isFinite(configuredRunTimeoutMs)
   : 30000;
 const CODEARENA_SANDBOX_IMAGE = process.env.CODEARENA_SANDBOX_IMAGE || 'madlab-runner:latest';
 const CODEARENA_DOCKER_BIN = process.env.CODEARENA_DOCKER_BIN || 'docker';
+const CODEARENA_REQUIRE_AUTH_FOR_EXECUTION = process.env.CODEARENA_REQUIRE_AUTH_FOR_EXECUTION === 'true';
 const MAX_INTERACTIVE_SESSIONS = 3;
 const MAX_INTERACTIVE_OUTPUT_BYTES = 256 * 1024;
 const MAX_INTERACTIVE_INPUT_BYTES = 256 * 1024;
@@ -754,6 +755,10 @@ async function handleInteractiveRun(req, res, pathname) {
 
 async function handleApi(req, res, pathname) {
   if (pathname.startsWith('/api/auth/')) return handleAuth(req, res, pathname);
+  if (CODEARENA_REQUIRE_AUTH_FOR_EXECUTION &&
+      (pathname === '/api/judge' || pathname.startsWith('/api/run')) && !getCurrentUser(req)) {
+    return sendJson(res, 401, { error: 'Sign in before running or submitting code.' });
+  }
   if (pathname === '/api/run' || pathname.startsWith('/api/run/')) return handleInteractiveRun(req, res, pathname);
   if (pathname === '/api/judge' && req.method === 'GET') {
     const id = new URL(req.url, 'http://localhost').searchParams.get('id');

@@ -1,0 +1,58 @@
+services:
+  codearena:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: unless-stopped
+    environment:
+      PORT: "8000"
+      NODE_ENV: production
+      CODEARENA_DOCKER_BIN: /usr/bin/docker
+      CODEARENA_SANDBOX_IMAGE: madlab-runner:latest
+      CODEARENA_REQUIRE_AUTH_FOR_EXECUTION: ${CODEARENA_REQUIRE_AUTH_FOR_EXECUTION:-true}
+      CODEARENA_SESSION_SECRET: ${CODEARENA_SESSION_SECRET:?Set CODEARENA_SESSION_SECRET in .env}
+      CODEARENA_AUTH_TTL_MS: ${CODEARENA_AUTH_TTL_MS:-86400000}
+      CODEARENA_RUN_TIMEOUT_MS: ${CODEARENA_RUN_TIMEOUT_MS:-30000}
+      JUDGE0_BASE_URL: ${JUDGE0_BASE_URL:-}
+      JUDGE0_API_KEY: ${JUDGE0_API_KEY:-}
+      JUDGE0_RAPIDAPI_HOST: ${JUDGE0_RAPIDAPI_HOST:-}
+      JUDGE0_AUTH_TOKEN: ${JUDGE0_AUTH_TOKEN:-}
+      JUDGE0_LANGUAGE_IDS: ${JUDGE0_LANGUAGE_IDS:-}
+      TMPDIR: ${CODEARENA_RUNFILES_DIR:-/opt/codearena/runfiles}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - codearena-auth:/app/.data
+      - ${CODEARENA_RUNFILES_DIR:-/opt/codearena/runfiles}:${CODEARENA_RUNFILES_DIR:-/opt/codearena/runfiles}
+    expose:
+      - "8000"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:8000/').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    environment:
+      CODEARENA_DOMAIN: ${CODEARENA_DOMAIN:?Set CODEARENA_DOMAIN in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      codearena:
+        condition: service_healthy
+
+volumes:
+  codearena-auth:
+  caddy-data:
+  caddy-config:

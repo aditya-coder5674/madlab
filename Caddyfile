@@ -1,0 +1,3 @@
+{$CODEARENA_DOMAIN} {
+    reverse_proxy codearena:8000
+}

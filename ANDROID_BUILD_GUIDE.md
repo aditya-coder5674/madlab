@@ -1,6 +1,6 @@
 # CodeArena Android Build Guide
 
-The Flutter Android app is an additional native client. The existing website and Node backend remain separate and unchanged.
+The Flutter Android app is an additional native client. The original website files remain unchanged. `Dockerfile.backend`, `compose.backend.yaml`, and `Caddyfile` provide an optional self-hosted Node backend stack; it has not been deployed to a public host from this workspace.
 
 ## Architecture and Features
 
@@ -28,6 +28,44 @@ The existing Node backend can provide the required API routes when deployed in a
 - Submit requires a valid server-side `JUDGE0_BASE_URL` and any provider credentials configured on the backend. Never put Judge0 credentials in Flutter or GitHub variables.
 - Run requires a reachable Docker daemon and the `madlab-runner:latest` image built from the existing `Dockerfile.runner`. Serverless deployments without Docker cannot provide this feature.
 - The backend currently keeps execution jobs in process memory and is designed to run as one instance.
+
+## Deploy a Persistent HTTPS Backend
+
+The current Vercel deployment returned HTTP 500 for its API routes. Vercel's serverless functions are not a suitable host for this backend as written: Run needs a Docker daemon and shared source mount, while auth data and judge jobs need persistent writable storage and one long-lived Node process. Do not point the APK at the Vercel URL until those API routes are repaired and verified.
+
+The repository now includes a single-instance Docker Compose stack for a dedicated Ubuntu VPS with Docker and Docker Compose installed. It runs the existing Node server, persists auth records, provides the Docker CLI/socket and shared runner temp path, and puts Caddy in front for automatic HTTPS. The backend is configured to require a signed-in session for Run and Submit. The Docker socket grants the backend container control of the VPS Docker daemon, so use a dedicated host and do not treat this as a multi-tenant deployment.
+
+1. Obtain a VPS with a public IPv4 address, a domain name you control, and Docker Engine plus the Docker Compose plugin. Point an `A` record such as `api.example.com` at the VPS address. Allow inbound TCP ports 80 and 443 in the VPS firewall.
+2. Put this repository's backend files on the VPS. From the repository root, copy `backend.env.example` to `.env` and edit `.env`:
+
+```bash
+cp backend.env.example .env
+openssl rand -hex 32
+```
+
+Set `CODEARENA_DOMAIN` to the DNS name, paste the generated random value into `CODEARENA_SESSION_SECRET`, and set `CODEARENA_RUNFILES_DIR` to an absolute path on the VPS. Keep `.env` private; it is ignored by Git. Never put Judge0 credentials in Flutter or the APK.
+
+3. Configure `JUDGE0_BASE_URL` and any provider credential fields in `.env` using a real Judge0-compatible service. Without that provider, Submit will continue to return a configuration error; the public Vercel response is not a Judge0 provider.
+4. On the VPS, build the existing isolated runner image and start the HTTPS stack:
+
+```bash
+docker build -f Dockerfile.runner -t madlab-runner:latest .
+docker compose --env-file .env -f compose.backend.yaml up --build -d
+```
+
+Caddy obtains and renews the HTTPS certificate when the DNS record resolves to the VPS and ports 80/443 are reachable. The Compose stack uses one app instance and a persistent Docker volume for account/session data. The runner source directory is bind-mounted at the same absolute path in the Node container and on the VPS so Docker can mount each run's source into its sandbox.
+
+5. Check `https://api.example.com/` loads the site. `curl -i https://api.example.com/api/auth/me` should return HTTP 401 when no session cookie is supplied; that is the expected unauthenticated response. Register/sign in through the app before using Run or Submit. Test Run first. Submit also requires the Judge0 configuration from step 3.
+6. Build a new release APK with the deployed HTTPS origin and reinstall it:
+
+```bash
+cd flutter_app
+flutter build apk --release --dart-define=API_BASE_URL=https://api.example.com
+```
+
+Replace the example host with the domain you configured. The output remains `build/app/outputs/flutter-apk/app-release.apk` relative to `flutter_app/`. The Vercel static deployment can remain online, but its relative API requests still point to Vercel; use the VPS-hosted site or keep using the native APK configured for the VPS backend.
+
+The deployment stack was built and its backend container smoke-tested locally, but it has not been installed on a VPS, given a real domain, or tested with a live Judge0 provider. Hosting, DNS, TLS reachability, Judge0 service access/credentials, and VPS costs must be supplied by the deployment owner.
 
 ## Local Setup
 
