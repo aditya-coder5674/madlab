@@ -21,10 +21,10 @@ class ApiClient {
   ApiClient({FlutterSecureStorage? secureStorage})
       : _secureStorage = secureStorage ?? const FlutterSecureStorage() {
     dio = Dio(BaseOptions(
-      baseUrl: ApiConfig.baseUrl.trim().replaceFirst(RegExp(r'/+$'), ''),
-      connectTimeout: const Duration(seconds: 12),
-      receiveTimeout: const Duration(seconds: 45),
-      sendTimeout: const Duration(seconds: 20),
+      baseUrl: ApiConfig.normalizedBaseUrl,
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+      sendTimeout: const Duration(seconds: 10),
       headers: const {'Accept': 'application/json'},
     ));
     dio.interceptors
@@ -38,6 +38,22 @@ class ApiClient {
 
   Future<void> clearSessionCookie() =>
       _secureStorage.delete(key: _cookieStorageKey);
+
+  Future<void> checkHealth() async {
+    ensureConfigured();
+    final response = await dio.get<Map<String, dynamic>>(
+      '/health',
+      options: Options(
+        connectTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 5),
+        sendTimeout: const Duration(seconds: 5),
+      ),
+    );
+    if (response.data?['status'] != 'ok') {
+      throw const ApiException(
+          'The backend health check returned an unexpected response.');
+    }
+  }
 
   static ApiException fromDio(DioException error) {
     final data = error.response?.data;

@@ -3,8 +3,15 @@ import 'package:flutter/foundation.dart';
 class ApiConfig {
   static const baseUrl = String.fromEnvironment('API_BASE_URL');
 
+  static String get normalizedBaseUrl =>
+      baseUrl.trim().replaceFirst(RegExp(r'/+$'), '');
+
+  static String get healthUrl => normalizedBaseUrl.isEmpty
+      ? 'API_BASE_URL is not configured (/health)'
+      : '$normalizedBaseUrl/health';
+
   static String? configurationError() {
-    final value = baseUrl.trim().replaceFirst(RegExp(r'/+$'), '');
+    final value = normalizedBaseUrl;
     if (value.isEmpty) {
       return 'Backend URL is not configured. Build with --dart-define=API_BASE_URL=https://your-backend.example.';
     }

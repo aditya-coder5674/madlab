@@ -18,6 +18,13 @@ The editor is a native monospace text editor with language-specific starter code
 
 Authentication uses the existing `/api/auth/register`, `/api/auth/login`, `/api/auth/logout`, and `/api/auth/me` endpoints. The app saves only the returned HTTP-only session cookie using Android secure storage; it never stores passwords. Accepted problem/debugging counts are device-local and are not represented as server-side account progress. The backend has no live leaderboard endpoint, so leaderboard rows are not presented as current rankings.
 
+## API URL Configuration
+
+- The Flutter app's only backend base URL is the `API_BASE_URL` compile-time value read by `flutter_app/lib/config/api_config.dart`. The GitHub Actions APK build reads the same-named repository variable.
+- The browser frontend in `js/app.js` calls relative `/api/...` paths, so it talks to the same origin that served the website; it has no separate hardcoded backend host.
+- `JUDGE0_BASE_URL` in `.env.example` and the backend environment is the upstream code-judging provider URL, not the CodeArena API URL.
+- Loopback addresses in `tests/`, `compose.backend.yaml`, and the simulated shell files in `js/app.js`/`codearena_final.html` are local test, health-check, or shell-demo values. They are not APK backend settings. No Codespaces `*.app.github.dev` URL is checked in.
+
 ## Backend Availability
 
 The configured public site at `https://madlab-beige.vercel.app` was probed on 2026-11-04. The auth, judge, and run API paths returned HTTP 500 `FUNCTION_INVOCATION_FAILED`, including for empty validation requests. Do not configure this deployment as a usable API until its server functions are repaired and verified. The mobile UI reports request errors and does not substitute mock authentication or execution.
@@ -32,6 +39,18 @@ The existing Node backend can provide the required API routes when deployed in a
 ## Deploy a Persistent HTTPS Backend
 
 The current Vercel deployment returned HTTP 500 for its API routes. Vercel's serverless functions are not a suitable host for this backend as written: Run needs a Docker daemon and shared source mount, while auth data and judge jobs need persistent writable storage and one long-lived Node process. Do not point the APK at the Vercel URL until those API routes are repaired and verified.
+
+### Render free web service
+
+The repository includes `render.yaml` and a minimal `package.json` for a Render Node web service. To deploy:
+
+1. Push this repository to GitHub and sign in to [Render](https://render.com/).
+2. Choose **New → Blueprint**, connect the repository, and approve the `codearena-backend` service. Keep the generated `CODEARENA_SESSION_SECRET` private.
+3. In the service's **Environment** settings, enter a real `JUDGE0_BASE_URL` and any provider credentials your Judge0 service requires. Do not use the example placeholder. Save and let Render deploy.
+4. Copy the service's HTTPS URL, then verify `https://YOUR-SERVICE.onrender.com/health` returns `{"status":"ok"}`. The app root should serve the web frontend.
+5. Build the APK with that exact HTTPS origin using the command below.
+
+Render's free service sleeps when idle and can take time to wake; its URL stays the same, but it is not continuously available. Free instances have no persistent disk, so account/session data stored by this backend can be lost when the service restarts or redeploys. The free plan also does not provide the Docker runner required by interactive **Run**; **Submit** can work when a real Judge0 provider is configured. Use a host with persistent storage and Docker support for durable accounts and interactive runs.
 
 The repository now includes a single-instance Docker Compose stack for a dedicated Ubuntu VPS with Docker and Docker Compose installed. It runs the existing Node server, persists auth records, provides the Docker CLI/socket and shared runner temp path, and puts Caddy in front for automatic HTTPS. The backend is configured to require a signed-in session for Run and Submit. The Docker socket grants the backend container control of the VPS Docker daemon, so use a dedicated host and do not treat this as a multi-tenant deployment.
 
@@ -85,7 +104,7 @@ For a standard Android emulator and a Node backend running on the development ho
 flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8000
 ```
 
-The Android debug manifest allows cleartext traffic for local testing only. For a physical phone on the same network, run the backend bound to a LAN-accessible interface and use the development computer's LAN IP, for example `http://192.168.1.20:8000`. Allow the port through the host firewall and keep the phone and computer on the same network. Replace the example address with the actual address on your network.
+The backend listens on `0.0.0.0` and uses the `PORT` environment variable (default `8000`). The Android debug manifest allows cleartext traffic for local testing only. For a physical phone on the same network, run `node server.js` on the development computer and build/run with its LAN address, for example `flutter run --dart-define=API_BASE_URL=http://192.168.1.20:8000`. Allow the port through the host firewall and keep the phone and computer on the same network. Replace the example address with the actual address on your network.
 
 For release builds, the app requires an HTTPS `API_BASE_URL`. A missing URL leaves browsing available but disables server-dependent auth, Run, and Submit with an explanatory error.
 

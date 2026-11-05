@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: codearena-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CODEARENA_SESSION_SECRET
+        generateValue: true
+      - key: CODEARENA_REQUIRE_AUTH_FOR_EXECUTION
+        value: "true"
+      - key: JUDGE0_BASE_URL
+        sync: false
+      - key: JUDGE0_API_KEY
+        sync: false
+      - key: JUDGE0_RAPIDAPI_HOST
+        sync: false
+      - key: JUDGE0_AUTH_TOKEN
+        sync: false

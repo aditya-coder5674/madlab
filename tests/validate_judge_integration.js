@@ -151,6 +151,19 @@ async function run() {
   const appUrl = `http://127.0.0.1:${server.address().port}`;
 
   try {
+    const health = await fetch(`${appUrl}/health`);
+    assert.strictEqual(health.status, 200);
+    assert.deepStrictEqual(await health.json(), { status: 'ok' });
+    const preflight = await fetch(`${appUrl}/api/auth/me`, {
+      method: 'OPTIONS',
+      headers: {
+        Origin: 'https://mobile.example',
+        'Access-Control-Request-Method': 'GET'
+      }
+    });
+    assert.strictEqual(preflight.status, 204);
+    assert.strictEqual(preflight.headers.get('access-control-allow-origin'), '*');
+
     const initial = await startJob(appUrl, {
       stdin: 'sample input\n',
       sourceCode: '```python\nprint("Hello, World!")\n```'

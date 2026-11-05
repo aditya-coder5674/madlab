@@ -385,6 +385,13 @@ function sendJson(res, status, value) {
   res.end(body);
 }
 
+function applyCors(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Idempotency-Key, Authorization');
+  res.setHeader('Access-Control-Expose-Headers', 'X-Request-ID');
+}
+
 function readJson(req, limit = 512 * 1024) {
   return new Promise((resolve, reject) => {
     let body = '';
@@ -935,6 +942,15 @@ async function runExecutionJob(job) {
 
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  applyCors(req, res);
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    return res.end();
+  }
+  if (url.pathname === '/health') {
+    if (req.method !== 'GET') return sendJson(res, 405, { error: 'Method not allowed' });
+    return sendJson(res, 200, { status: 'ok' });
+  }
   if (url.pathname.startsWith('/api/')) {
     const requestId = crypto.randomUUID();
     const requestStartedAt = Date.now();
@@ -966,9 +982,9 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-if (require.main === module) server.listen(PORT, () => {
+if (require.main === module) server.listen(PORT, '0.0.0.0', () => {
   const configured = Boolean(process.env.JUDGE0_BASE_URL);
-  console.log(`CodeArena listening on http://localhost:${PORT}`);
+  console.log(`CodeArena listening on 0.0.0.0:${PORT}`);
   console.log(`[judge] JUDGE0_BASE_URL=${configured ? '<configured>' : '<missing>'} API_KEY=${process.env.JUDGE0_API_KEY ? '<configured>' : '<missing>'} RAPIDAPI_HOST=${process.env.JUDGE0_RAPIDAPI_HOST ? '<configured>' : '<missing>'} AUTH_TOKEN=${process.env.JUDGE0_AUTH_TOKEN ? '<configured>' : '<missing>'}`);
 });
 

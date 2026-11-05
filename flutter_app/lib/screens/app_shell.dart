@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../config/api_config.dart';
 import '../services/api_client.dart';
 import '../services/interactive_run_service.dart';
 import '../services/judge_service.dart';
@@ -38,11 +39,31 @@ class AppShell extends StatefulWidget {
 class _AppShellState extends State<AppShell> {
   int _selectedIndex = 0;
   late final Future<void> _authRestore;
+  String? _backendError;
+  bool _checkingBackend = true;
 
   @override
   void initState() {
     super.initState();
     _authRestore = widget.authController.restore();
+    _checkBackend();
+  }
+
+  Future<void> _checkBackend() async {
+    setState(() {
+      _checkingBackend = true;
+      _backendError = null;
+    });
+    try {
+      await widget.apiClient.checkHealth();
+    } catch (exception) {
+      if (!mounted) return;
+      setState(() {
+        _backendError = 'Could not reach ${ApiConfig.healthUrl}: $exception';
+      });
+    } finally {
+      if (mounted) setState(() => _checkingBackend = false);
+    }
   }
 
   void _openProfile() => Navigator.of(context).push(MaterialPageRoute<void>(
@@ -74,35 +95,47 @@ class _AppShellState extends State<AppShell> {
                     icon: const Icon(Icons.account_circle_outlined)),
               ],
             ),
-      body: FutureBuilder<void>(
-        future: _authRestore,
-        builder: (context, snapshot) => IndexedStack(
-          index: _selectedIndex,
-          children: [
-            HomeScreen(
-              repository: widget.problemRepository,
-              authController: widget.authController,
-              onProblems: () => setState(() => _selectedIndex = 1),
-              onEditor: () => setState(() => _selectedIndex = 2),
-              onDebugging: () => setState(() => _selectedIndex = 3),
-              onLeaderboard: _openLeaderboard,
-              onProfile: _openProfile,
+      body: Column(
+        children: [
+          if (_checkingBackend || _backendError != null)
+            _BackendStatus(
+              checking: _checkingBackend,
+              error: _backendError,
+              onRetry: _checkBackend,
             ),
-            ProblemsScreen(
-                repository: widget.problemRepository,
-                judgeService: widget.judgeService,
-                runService: widget.runService,
-                progressStore: widget.progressStore),
-            EditorScreen(
-                judgeService: widget.judgeService,
-                runService: widget.runService),
-            DebuggingScreen(
-                repository: widget.problemRepository,
-                judgeService: widget.judgeService,
-                runService: widget.runService,
-                progressStore: widget.progressStore),
-          ],
-        ),
+          Expanded(
+            child: FutureBuilder<void>(
+              future: _authRestore,
+              builder: (context, snapshot) => IndexedStack(
+                index: _selectedIndex,
+                children: [
+                  HomeScreen(
+                    repository: widget.problemRepository,
+                    authController: widget.authController,
+                    onProblems: () => setState(() => _selectedIndex = 1),
+                    onEditor: () => setState(() => _selectedIndex = 2),
+                    onDebugging: () => setState(() => _selectedIndex = 3),
+                    onLeaderboard: _openLeaderboard,
+                    onProfile: _openProfile,
+                  ),
+                  ProblemsScreen(
+                      repository: widget.problemRepository,
+                      judgeService: widget.judgeService,
+                      runService: widget.runService,
+                      progressStore: widget.progressStore),
+                  EditorScreen(
+                      judgeService: widget.judgeService,
+                      runService: widget.runService),
+                  DebuggingScreen(
+                      repository: widget.problemRepository,
+                      judgeService: widget.judgeService,
+                      runService: widget.runService,
+                      progressStore: widget.progressStore),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
@@ -129,6 +162,50 @@ class _AppShellState extends State<AppShell> {
       ),
     );
   }
+}
+
+class _BackendStatus extends StatelessWidget {
+  final bool checking;
+  final String? error;
+  final VoidCallback onRetry;
+
+  const _BackendStatus({
+    required this.checking,
+    required this.error,
+    required this.onRetry,
+  });
+
+  @override
+  Widget build(BuildContext context) => Material(
+        color: const Color(0xFF10232F),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              if (checking)
+                const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              else
+                const Icon(Icons.cloud_off, color: Colors.orangeAccent),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  checking ? 'Checking backend…' : error!,
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+              if (!checking)
+                TextButton(
+                  onPressed: onRetry,
+                  child: const Text('Retry'),
+                ),
+            ],
+          ),
+        ),
+      );
 }
 
 class _BrandTitle extends StatelessWidget {

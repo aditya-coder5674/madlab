@@ -28,5 +28,7 @@ void main() {
 
     expect(find.text('Practice with purpose.'), findsOneWidget);
     expect(find.byKey(const ValueKey('home-problems')), findsOneWidget);
+    expect(find.text('Retry'), findsOneWidget);
+    expect(find.textContaining('API_BASE_URL is not configured'), findsOneWidget);
   });
 }
