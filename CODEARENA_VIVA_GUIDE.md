@@ -120,6 +120,42 @@ This is a **client-server system**: a client displays the interface and a Node p
 | `.gitignore` and Flutter/Android `.gitignore` files | Ignore local `.env`, `.data`, caches/build/signing data; Android wrapper files are allowed through. | Protect secrets/generated outputs from Git. |
 | `.vscode/tasks.json` | VS Code task to run `node server.js`. | Starts local website at default port 8000. |
 
+### Flutter file-by-file reference
+
+| File | Purpose and relationship |
+|---|---|
+| `flutter_app/lib/screens/home_screen.dart` | Dashboard, counts bundled problems, links to app sections, shows API-not-configured notice. |
+| `flutter_app/lib/screens/problems_screen.dart` | Loads `ProblemRepository`, filters title/tags/difficulty, opens problem details. |
+| `flutter_app/lib/screens/problem_detail_screen.dart` | Shows description/examples/constraints and opens `EditorScreen` with that problem. |
+| `flutter_app/lib/screens/debugging_screen.dart` | Filters bundled debug questions; detail view shows behavior/tests and opens editor. |
+| `flutter_app/lib/screens/editor_screen.dart` | Native editor, language drafts, auto-indent, Run/SSE/stdin/Stop, Submit/verdict display. |
+| `flutter_app/lib/screens/auth_screen.dart` | Login/register forms; calls `AuthController`, displays errors/loading. |
+| `flutter_app/lib/screens/profile_screen.dart` | Shows authenticated user, local accepted problem/debug counts, sign-in/sign-out; explicitly says progress is not server-synced. |
+| `flutter_app/lib/screens/leaderboard_screen.dart` | Honest unavailable state; does not display browser sample leaderboard as real. |
+| `flutter_app/lib/models/problem.dart` | Defines problem, example, test-case fields and JSON converters. |
+| `flutter_app/lib/models/debugging_question.dart` | Defines debugging question/test fields and JSON converters. |
+| `flutter_app/lib/models/run_event.dart` | Holds parsed SSE event name/data and run ID/event stream. |
+| `flutter_app/lib/services/api_client.dart` | Dio base URL/timeouts, API errors, secure session-cookie interceptor. |
+| `flutter_app/lib/services/auth_service.dart` | Calls register/login/logout/me and maps backend user JSON. |
+| `flutter_app/lib/services/judge_service.dart` | POSTs test cases, polls execution ID, returns final verdict JSON. |
+| `flutter_app/lib/services/interactive_run_service.dart` | Starts Run, parses SSE lines, posts stdin, requests Stop. |
+| `flutter_app/lib/services/problem_repository.dart` | Reads bundled JSON assets with `rootBundle` and parses models. |
+| `flutter_app/lib/services/progress_store.dart` | Reads/writes accepted IDs in Flutter Secure Storage, locally only. |
+| `flutter_app/lib/state/auth_controller.dart` | Observable user/loading/error state used by screens. |
+| `flutter_app/lib/widgets/arena_widgets.dart` | Shared difficulty badge, API notice, section heading, and loading components. |
+| `flutter_app/android/app/src/main/AndroidManifest.xml` | App label/icon, launcher activity, and Internet permission. |
+| `flutter_app/android/app/src/main/kotlin/com/codearena/codearena/MainActivity.kt` | Minimal `FlutterActivity` native entrypoint; Flutter renders the UI. |
+| `flutter_app/android/app/build.gradle.kts` | Android application ID, SDK/Java versions, release build signed with debug key for testing. |
+| `flutter_app/android/settings.gradle.kts` | Resolves Flutter, Android Gradle, and Kotlin Gradle plugins. |
+| `flutter_app/android/gradle.properties` | AndroidX and memory-limited Gradle settings. |
+| `flutter_app/android/gradle/wrapper/*`, `gradlew*` | Pins/provides the Gradle wrapper needed to reproduce Android builds. |
+| `flutter_app/android/app/src/main/res/drawable/ic_codearena.xml` and `mipmap-*` | Native vector and raster launcher-icon resources. |
+| `flutter_app/android/app/src/debug/AndroidManifest.xml` | Debug-only cleartext allowance for local HTTP testing; release should use HTTPS. |
+| `flutter_app/test/widget_test.dart` | Checks dashboard branding/navigation control renders. |
+| `flutter_app/test/problem_repository_test.dart` | Checks 100+100 bundled data counts, boundary IDs/titles, starter languages, and nonempty tests. |
+| `flutter_app/.metadata`, `analysis_options.yaml`, `.gitignore`, `README.md` | Flutter project metadata, lints, ignored build/local files, and scaffold notes. |
+| `flutter_app/tool/sync_question_assets.js` | Generates Flutter data snapshots from the website's `js/questions.js` arrays. |
+
 ## F. Most Important Functions and Variables
 
 ### Browser
