@@ -361,4 +361,505 @@ For interactive stdin, use `print(int(input()) * 2)` and send `5` at the stdin p
 
 ## Submit and verdict
 
-A submit test case is a raw input string and expected output string. For the sample above: `stdin: "5"`, `expected: "10"`. The program must read stdin; the backend does not transform `
+A submit test case is a raw input string and expected output string. For the sample above: `stdin: "5"`, `expected: "10"`. The program must read stdin; the backend does not transform function-style examples into a test harness.
+
+# Part 5: Online Judge Concepts in This Project
+
+- **Online judge:** a service that runs a submitted program against test inputs and decides whether its output is acceptable.
+- **Compilation:** translating C/C++/Java source into an executable or bytecode. The runner invokes real compilers for these languages.
+- **Interpretation/execution:** running source through a runtime such as Python or Node.js.
+- **Test case:** one input string plus one expected output string. `PROBLEMS[].tc` uses fields `i` and `o`; the browser maps them to API `stdin` and `expected`.
+- **Actual output:** bytes printed by the program; the server captures stdout.
+- **Accepted:** the provider successfully executed a test and CodeArena's comparison passes all cases. **Wrong Answer:** the program ran, but its output did not match. **Compilation Error:** Judge0 reports compile failure. **Runtime Error:** it compiled/started but crashed. **Time Limit Exceeded:** Judge0 status 5 or interactive timeout.
+
+For `print(5 * 2)`, ordinary Run needs no stdin: Python executes inside Docker and stdout `10\n` arrives through SSE. For Submit, the program must read the provided test stdin and Judge0 must be configured. CodeArena sends source and input to Judge0, receives Base64 output/status, decodes them, and compares actual `10` with expected `10`.
+
+The runner has meaningful sandbox restrictions: no network, read-only container filesystem and code mount, non-root UID/GID, dropped capabilities, no-new-privileges, memory/CPU/PID/file limits, bounded runtime/output, and a temporary directory removed after the process ends. This is stronger than running user code directly in Node, but it is not a formal proof of isolation. In the VPS Compose deployment the API container mounts the host Docker socket, which is highly privileged; a compromise of that container could control host Docker. Use a dedicated machine, keep Docker/OS patched, and do not treat that deployment as multi-tenant infrastructure.
+
+# Part 6: Language Selection and Execution
+
+The browser problem editor's `<select id="lang-select">` calls `changeLang`; the standalone compiler uses `CLANG_CFG` and `switchCLang`. Flutter uses a dropdown backed by `_languages`. The client sends language strings `python`, `c`, `cpp`, `javascript`, or `java`.
+
+| Language | Interactive runner (`runner.sh`) | Submit default Judge0 ID | Input/output/errors |
+|---|---|---:|---|
+| Python 3 | `python3 -u /workspace/main.py` | 71 | `input()`/stdin; stdout/stderr streamed in Run or returned by Judge0. |
+| C | `gcc -std=c11`, then run `/tmp/program` | 50 | `scanf`/stdin, `printf`; compiler diagnostics and runtime stderr are captured. |
+| C++ | `g++ -std=c++17`, then run `/tmp/program` | 54 | `cin`/stdin, `cout`; compiler/runtime errors are captured. |
+| JavaScript | Node.js on `/workspace/main.js` | 63 | Node stdin/stdout/stderr. |
+| Java | `javac -d /tmp /workspace/Main.java`, then `java -cp /tmp Main` | 62 | Java stdin/stdout/stderr. |
+
+The five are configured in both server language maps and the runner script. Tests exercise Python and C interactively, plus mock Judge0 language IDs for Python and C; they do not prove all five languages against a live provider. A language appearing in a menu proves only that UI configuration exists; the relevant server/runner/provider must also be available.
+
+# Part 7: Database and CRUD Reality
+
+There is no database engine, schema, SQL query, migration, or database connection. Do not draw database tables as if they exist. Account data is a JSON file with two arrays:
+
+```text
+.data/auth.json
+  users: { id, username, email, passwordHash, joinedAt }[]
+  sessions: { token, userId, expiresAt }[]
+```
+
+Registration adds a user and session; login finds a username/email and verifies the password hash, replaces that user's old sessions, then writes the file. Logout removes a session. `/api/auth/me` reads the cookie token and looks up its session and user. This resembles CRUD, but is implemented by loading/mutating/writing a whole JSON document, not database queries. There are no foreign-key constraints, indexes, transactions, audit history, or concurrent-write protection.
+
+Solving a problem does not create a durable server row. Browser debug progress is a localStorage array. Browser normal-problem submissions and debug submission history are page-memory arrays. Flutter accepted problem/debug IDs are lists in device secure storage. Leaderboard data is a JavaScript constant. Judge and Run job state is in Node Maps and disappears on restart. Therefore there are no real “appear on leaderboard” or account-wide score writes.
+
+# Part 8: Frontend and Native Screens
+
+## Browser (`index.html`, `css/style.css`, `js/app.js`)
+
+- **Home:** hero buttons switch sections; the three counters animate toward hard-coded values 100, 24,600, and 380,000. They are not queried from users/submissions.
+- **Problems:** search and Easy/Medium/Hard filter the bundled problem array. Clicking a row calls `openProblem(id)`.
+- **Debugging Arena:** search and difficulty filter generated debugging entries; details include description, buggy code, hints, and tests. Accepted IDs are stored locally.
+- **Solve/editor:** a 40% problem panel plus plain textarea, language select, line numbers, Run, Submit, output tabs, and restricted clipboard toggle. The toggle is client-side friction, not a secure exam/anti-cheating control.
+- **Compiler:** a separate textarea editor with five language tabs, snippets, font-size/theme controls, stdin box, and the same real interactive Run backend. It is not a standalone compiler bundled in the browser.
+- **Terminal:** has a sidebar backed by the `VFS` JavaScript object, command prompt, tabs, help, and simulated shell utilities. Source execution commands call the Docker API using code read from VFS.
+- **Leaderboard:** `renderLB()` renders constant `LB` rows. No network request or ranking calculation.
+- **Profile:** HTML starts with sample identity/stats; `renderDashboard()` substitutes local values and formula-derived numbers. `renderHeatmap()` uses `Math.random()`, so activity is decorative, not submission history.
+- **Login/register modals:** submit to backend routes. Remember-me and forgot-password controls are not wired.
+- **Interview Arena, SQL Playground, AI chatbot:** absent from the current `index.html` pages and current JS implementation. Not implemented.
+
+HTML owns page elements and inline event attributes, CSS owns appearance/responsive rules, and JS finds element IDs, reads values, builds table/detail markup, calls APIs, and updates the DOM. There is one `@media(max-width:768px)` rule that changes several layouts; this is responsive styling, not a separate mobile frontend framework.
+
+## Android (`flutter_app/`)
+
+The app is native Flutter/Dart, not a WebView. `main.dart` constructs service instances and a Material 3 theme. `AppShell` supplies bottom tabs Home/Problems/Editor/Debug; Profile and Leaderboard open as routes. Home loads source-backed problem assets and displays actual bundled counts. Problem library search/filter uses title and tags; details show descriptions/examples/constraints and a warning that test data is not certified. Debug screens show provided behavior/hints/tests. Editor uses a monospace TextField with basic automatic indentation, per-language drafts, output, stdin, Run, Stop, and Submit. It has no syntax highlighting.
+
+Profile shows the current backend account if signed in and accepted IDs stored locally. Leaderboard explicitly says no live ranking is available. Auth, Run, and Submit show an API configuration/error state rather than fake success. Progress is device-only and is not synced to the server.
+
+# Part 9: JavaScript Concepts and Important Functions
+
+`js/app.js` uses global state variables for the active problem, current filters, current run, browser submission arrays, current language, terminal cwd/history/tabs, and `VFS`. Functions are declared globally because HTML inline handlers call them. `DOMContentLoaded` initializes views and attaches scroll/password listeners.
+
+- `renderProblems`/`renderDebuggingProblems`: filter arrays with `Array.filter`, then build rows using template strings and `innerHTML`.
+- `openProblem`/`openDebugProblem`: find a record by ID, inject details, set editor text, and show Solve.
+- `handleTab`/`compTab`: intercept Tab and insert four spaces into textarea.
+- `startInteractiveRun`: POST, obtains run ID, creates browser `EventSource`, handles typed SSE events.
+- `requestJudgeExecution`: POSTs with a random `Idempotency-Key`, polls every 500 ms, and converts network/API exceptions to an Execution Error object.
+- `submitCode`: creates test list, changes button/loading state, calls backend, stores current-page/local debug progress, renders result.
+- `normalizeOutput`/`outputsEqual` are backend JS, not browser functions; they perform comparison.
+- `execTerm`: a large `switch` implements virtual command behavior. `captureTerm` supports only a subset for simple pipes.
+- `handleRegister`/`handleLogin`/`handleLogout`: form validation + fetch + cookie-based API calls + local identity cache.
+- `escapeHTML` escapes five HTML-sensitive characters in some dynamic outputs. Not every static-data HTML interpolation uses it.
+- `setTimeout`/`setInterval`: toast clearing, loading bar reset, fake homepage number animation, job polling.
+
+JavaScript arrays/objects are in-memory data structures; `localStorage` is per-browser text storage; `fetch` makes HTTP requests; template strings build HTML; DOM means the browser's in-memory representation of the page.
+
+# Part 10: Backend API Table
+
+| Endpoint | Method | Purpose/input | Processing/output |
+|---|---|---|---|
+| `/api/auth/register` | POST | `{username,email,password}` | Validates; creates PBKDF2 hash and user/session; 201 `{user}` plus cookie, or 400/409. |
+| `/api/auth/login` | POST | `{username/email,password}` | Verifies account; rotates sessions; returns user + cookie, or 401. |
+| `/api/auth/logout` | POST | Cookie | Removes current session, expires cookie, `{ok:true}`. |
+| `/api/auth/me` | GET | Cookie | 200 authenticated user or 401 `{authenticated:false,user:null}`. |
+| `/api/run` | POST | `{sourceCode,language}` | Creates Docker session; 202 `{runId,state}`; validation/capacity/Docker errors. |
+| `/api/run/{id}/events` | GET | Run ID | `text/event-stream`: status/stdout/stderr/finished events. |
+| `/api/run/{id}/input` | POST | `{data}` | Forwards stdin to live process; 202 or 400/409/413. |
+| `/api/run/{id}/stop` | POST | Run ID | Requests stop; 202. |
+| `/api/judge` | POST | `{sourceCode,language,tests:[{stdin,expected,unordered?}]}` | Validates, creates async job; 202 `{executionId,state}` or 400/503. |
+| `/api/judge?id={id}` | GET | Execution ID | Returns queued/running/completed/failed state and final result, or 404 expired/missing job. |
+
+There are no PUT, PATCH, or DELETE routes. `/api/run` and `/api/judge` are only gated by sign-in if `CODEARENA_REQUIRE_AUTH_FOR_EXECUTION=true`; the local default is false and Compose sets true. Auth endpoints remain available for registration/login.
+
+## Complete frontend-to-provider-to-frontend Submit example
+
+`submitCode()` in browser maps `PROBLEMS[n].tc` to stdin/expected strings and invokes `judgeSubmission()` -> `requestJudgeExecution()` -> `POST /api/judge`. `handleApi()` validates and creates a map-backed job. `runExecutionJob()` calls `executeTest()` per test; that calls Judge0. Judge0 response is Base64-decoded, classified, compared with expected output, then saved as job result. Browser polling `GET /api/judge?id=...` receives final JSON; `renderJudgeResult()` displays verdict and test info. Flutter uses `JudgeService.submit` for the same endpoint contract.
+
+# Part 11: Authentication and Security Review
+
+## What exists
+
+Registration requires username/email/password, checks basic email shape, uniqueness, and server-side minimum length 8. `hashPassword` uses random 16-byte salt encoded as hex and PBKDF2 with 120,000 SHA-512 iterations and 64-byte output. `verifyPassword` uses `crypto.timingSafeEqual`. The session identifier has 32 random bytes (64 hex characters); it is an opaque bearer token, meaning possession of the cookie identifies the session. Cookie is HttpOnly, SameSite=Lax, Secure in production, and has configurable expiry. Flutter stores cookie value with Flutter Secure Storage and never stores password.
+
+## Issues and improvements
+
+| Severity | Problem → risk → improvement |
+|---|---|
+| HIGH | VPS API container mounts `/var/run/docker.sock`; Docker socket access is effectively host control. Keep the host dedicated and trusted; consider a separately isolated runner host/remote daemon or a narrower execution service. |
+| HIGH | Public registration has no rate-limit, CAPTCHA, email verification, or abuse controls; an attacker can create accounts and consume PBKDF2/disk. Add throttling, verification, quotas, monitoring, and account lifecycle controls. |
+| HIGH | Browser leaderboard/profile counters are fake but labels look factual, which misleads users. Replace them with real authorized aggregate APIs or label as demo data. |
+| HIGH | Problem tests are raw strings and not consistently connected to described function signatures; a plausible solution can receive unusable input/expected values. Standardize input format/harness, independently verify every expected output, and do not advertise all as judge-ready. |
+| MEDIUM | `AUTH_SESSION_SECRET` is read into a constant but not referenced elsewhere in `server.js`; session tokens are random and stored directly in JSON, not signed HMAC cookies despite some README wording. Either remove the unused secret and document opaque server-side sessions accurately, or implement an intentional signed-token design. |
+| MEDIUM | Auth storage is synchronous whole-file JSON with no atomic write/locking/backup; concurrent writes or disk loss can corrupt/lose data. Use a database or atomic writes/backups before real accounts. |
+| MEDIUM | Job/idempotency/run state is only in process Maps. Restart loses active jobs and multiple replicas cannot poll each other's job. Keep one instance (Compose does) or move state to shared storage. |
+| MEDIUM | Browser `innerHTML` interpolates problem/debug data without escaping every field. Current records are bundled source data, but future remotely editable data can create XSS. Escape untrusted fields or use `textContent`/DOM node construction. |
+| MEDIUM | No explicit CSRF token or request Origin validation. SameSite=Lax helps, and same-origin use is expected, but add CSRF/Origin controls before broader web account deployment. |
+| MEDIUM | `parseCookies` uses `decodeURIComponent`; malformed cookie encodings can throw, and request handler has no top-level error wrapper. Validate/catch bad cookie values and catch async route failures. |
+| MEDIUM | Codespaces backend uses public forwarding and an ephemeral process. Do not use for real accounts or a production showcase with sensitive passwords. Use a stable HTTPS host and rotate the session secret. |
+| LOW | “Remember me” and “Forgot password?” are visible but nonfunctional. Remove or implement them. |
+| LOW | Browser terminal file operations and ordinary system output are simulations. Make this prominent in the UI or use an actual managed terminal service. |
+| LOW | The Flutter editor has no syntax highlighting; mobile editor function is usable but basic. Add a maintained editor component if needed. |
+| LOW | Root `README.md` still contains an older note that Flutter was unavailable/scaffold-only. It is stale relative to current built Flutter app; use `ANDROID_BUILD_GUIDE.md` as current Android instructions and update README when allowed. |
+
+There is no SQL database, so SQL injection into a project database is not applicable. CORS headers are not configured; same-origin web requests do not need CORS, and native Dio is not subject to browser CORS. Docker command invocation uses `spawn(binary,args)` rather than concatenating user source into a shell command; source is mounted as a file, and the runner container has no network. The Docker socket on the backend host remains the largest infrastructure privilege.
+
+# Part 12: Feature-by-Feature Status
+
+1. **Coding problems:** implemented as bundled static data, 100 IDs, filters/search/details. Not remote database-managed.
+2. **Difficulty:** local string filter; problem values Easy/Medium/Hard, debug values Easy/Moderate/Hard.
+3. **Editor:** plain textarea / Flutter TextField; basic tabs/indentation/line numbers. No syntax coloring, language server, or code completion.
+4. **Languages:** five are in the client and runner mapping; actual provider availability depends on Judge0 IDs/config. Docker tests cover only Python/C.
+5. **Compiler/execution:** real Docker compilers/interpreters for Run. Judge0 for Submit. No compilation occurs in browser.
+6. **Test cases:** data exists but has not been exhaustively checked; tests are supplied verbatim as stdin.
+7. **Submission:** actual async Judge0 proxy when configured; absent provider makes it unavailable.
+8. **Score:** debugging record has static score; no total score engine or live leaderboard scoring.
+9. **Leaderboard:** browser constant only; native screen clearly says no live rankings.
+10. **Profile:** auth identity is real if backend works; dashboard statistics are partly sample/formula-driven; Flutter progress is local.
+11. **Dashboard:** real navigation/count of bundled data; browser counters are hardcoded.
+12. **Interview Arena:** absent.
+13. **Timer:** no user-facing timed challenge; runtime timeout exists on server.
+14. **Debugging questions:** 100 metadata-rich bundled entries; validation does not prove each exercise's code/tests are coherent.
+15. **SQL Playground:** absent (no SQL page/engine/database).
+16. **AI chatbot:** absent.
+17. **Shell terminal:** hybrid; virtual FS/commands are simulated, file execution goes to Docker.
+
+# Part 13: Algorithms and Logic
+
+| Logic | Location | Simple explanation and complexity |
+|---|---|---|
+| Problem filter/search | `renderProblems`, `renderDebuggingProblems` | Scans all records and checks title/tags; O(n × string/tag checks), O(n) output list. n is 100. |
+| Virtual path normalization | `resolvePath`, `normPath` | Processes path segments, pushing/popping `..`; O(number of path segments). |
+| Virtual filesystem lookup | `getNode` | Walks object children by each path segment; O(depth). |
+| Output normalization | `normalizeOutput` | Converts CRLF, trims outer whitespace and trailing horizontal line spaces; O(output length). |
+| JSON output compare | `outputsEqual` | Recursively compares numbers/arrays/objects; object key order is sorted. Usually O(n log n) due to key sorting, plus structure walk. |
+| Unordered top-level array compare | `outputsEqual(...unorderedTopLevelArray:true)` | Finds/removes a match for each expected item; worst-case O(k²) item searches for k top-level values. |
+| Judge retry/backoff | `judge0Poll` | Retries transient GET polling errors with capped exponential delay; never resubmits POST on timeout. At most three GET attempts per poll operation. |
+| Async job polling | clients | Browser waits 500 ms between job checks; Flutter same interval, up to 65 seconds. |
+| Debug difficulty generation | `js/questions.js` | Filters a seed by difficulty, takes configured slices, maps each to IDs 101–200. Linear scan/map over seed. |
+| Sorting | terminal `sort`; problem ID validation | JS `.sort()` used on virtual file lines; not a ranking algorithm. |
+
+The repository does not implement a novel competitive-programming algorithm as its core. Its main algorithmic contribution is orchestration/comparison/sandbox workflow, not solving every stored problem.
+
+# Part 14: Important Variables
+
+| Name | File | Purpose/type |
+|---|---|---|
+| `PROBLEMS` | `js/questions.js` | Array of 100 problem objects: id, title, diff, tags, sample acceptance/solved, description, examples, constraints, tests, starter code. |
+| `DEBUGGING_QUESTIONS` | same | 100 generated debug objects, IDs 101–200, tests/hints/templates/score. |
+| `LB` | same | Static sample leaderboard users/score/solved/streak/colors. |
+| `curProblem`, `curDebugProblem` | `js/app.js` | Current browser selection object or null. |
+| `submissions`, `debugSubmissions` | same | Current-page submission history arrays, not server persistence. |
+| `activeInteractiveRun` | same | Current browser run ID/EventSource/UI/state. |
+| `CLANG_CFG`, `cCode` | same | Compiler starter/snippet config and unsaved in-memory per-language drafts. |
+| `VFS`, `termCwd`, `termHistory` | same | Simulated file tree, cwd, and terminal command history. |
+| `executionJobs`, `idempotentExecutions`, `interactiveSessions` | `server.js` | Maps holding transient job/session state. |
+| `AUTH_STATE` | same | Loaded JSON object of users/sessions. |
+| `JUDGE0_BASE_URL`, `TIME_LIMIT_MS` | same | Provider URL and resource/time settings from environment. |
+| `CODEARENA_REQUIRE_AUTH_FOR_EXECUTION` | same | Boolean security gate for `/api/judge` and `/api/run`; Compose sets true. |
+| `ApiConfig.baseUrl` | Flutter config | Compile-time API URL. |
+| `_language`, `_drafts`, `_runId`, `_judgeResult` | Flutter `editor_screen.dart` | Active editor language/code drafts/session/result state. |
+| `_problemKey`, `_debugKey` | Flutter `progress_store.dart` | Secure-storage keys for local accepted-ID arrays. |
+
+# Part 15: Error Handling
+
+- **Invalid registration:** server returns 400 for missing fields, short password, invalid email; 409 for username/email conflict. Browser displays toast; Flutter shows a SnackBar.
+- **Invalid login:** server returns 401; clients display API error. Password comparison is server-side.
+- **Missing auth:** `/api/auth/me` returns 401. If optional execution gate enabled, Run/Submit routes return 401 before execution.
+- **Empty/oversize source:** Run/Judge returns 400; source max 128 KiB. Judge stdin max 64 KiB, test count max 100.
+- **Unsupported language:** 400 with message; interactive allows Python/C/C++/JavaScript/Java.
+- **Runner unavailable/capacity:** 503 on container launch failure; 429 at max three active sessions. Runtime/output limit events stop process.
+- **Compile/runtime errors:** interactive outputs stderr and finished state; Judge0 statuses are mapped to verdicts.
+- **Wrong answer:** server stops at first mismatched test and returns expected/actual. Later test cases are not run after first failure.
+- **Judge0 unavailable/invalid:** categorized execution error; logs request ID/provider HTTP status without source or credentials. Poll GET may retry; provider POST does not.
+- **Timeout:** Judge overall deadline defaults 30s; interactive run defaults 30s, capped at 120s; Flutter polling deadline is 65s.
+- **Network errors:** browser wraps judge fetch errors into Execution Error; Flutter maps Dio exceptions to user messages; SSE drop has connection status handling.
+- **Missing problem assets:** Flutter FutureBuilder shows error/loading notices. Browser source constants are loaded as scripts; there is no remote problem fetch.
+- **Database errors:** no database exists. JSON file load falls back to empty arrays on parse/read error, logging a warning.
+
+Limitations: no global Express-style error middleware; the async HTTP callback/route should have a comprehensive rejection boundary. The browser has better handling in the judge path than in all other fetch/run paths.
+
+# Part 16: Testing
+
+| Test file | Tests | Does not prove |
+|---|---|---|
+| `tests/validate_problem_bank.js` | Exactly 100 IDs 1–100, test field types, non-empty cases, screens selected placeholders. | Algorithm correctness or consistency of stdin with statement. |
+| `tests/validate_debugging_questions.js` | Parses generated question slice; 100 questions, IDs/required fields/tests/hints, 35/40/25 distribution. | Whether each bug description and expected answer is correct. |
+| `tests/validate_judge_proxy.js` | Output whitespace, JSON structural equality, numeric tolerance, unordered top array, code-fence cleanup, Judge0 status mapping. | Real network/provider behavior. |
+| `tests/validate_judge_integration.js` | Mock provider success, payload/auth headers, async polling, retries, timeout, malformed requests, provider errors, idempotency, log redaction. | Real Judge0 account, credentials, latency, service behavior. |
+| `tests/validate_interactive_runner.js` | Docker live stdin/stdout, Stop, C compile error, Python runtime error, Python/C success. | Full five-language coverage or phone UI/API end-to-end. |
+| `flutter_app/test/problem_repository_test.dart` | 100 problems/debug questions, first/last titles/IDs, language starter map and non-empty tests. | Live backend or all data correctness. |
+| `flutter_app/test/widget_test.dart` | Dashboard branding and navigation control render. | Full screen navigation, auth, Run, Submit, Android device behavior. |
+
+Validated during this project: Flutter `pub get`, `flutter analyze`, `flutter test`, standard release APK build; Node validators; runner Docker integration; backend image/Compose config and loopback smoke test. Not validated: real Judge0 provider, actual VPS TLS deployment, Play Store signing, every Flutter API call against a production API, every language in Docker, all problem answers, and Android testing on a physical phone.
+
+Viva tests to demonstrate honestly: good Python `print(2)` Run; stdin prompt/echo; runtime error; stop a long run; compilation error with C; Judge mock test showing accepted/wrong/error classification; missing Judge0 configuration returns clear execution error; unauthenticated run on protected deployment returns 401; register/login and persisted cookie in a configured backend.
+
+# Part 17: Code Review Findings
+
+| Severity | Finding |
+|---|---|
+| HIGH | Public deployment mounts Docker socket into backend. API compromise can control host Docker; use dedicated host and consider isolated remote runner service. |
+| HIGH | User registration is open and unthrottled; can be abused for PBKDF2 CPU/disk growth. Add rate limits/email verification/CAPTCHA/monitoring. |
+| HIGH | Browser sample leaderboard/profile data look real. Replace with actual aggregate API or label clearly. |
+| HIGH | Stored test data is not an authoritative problem oracle; several tests/inputs are not coherent with function-style descriptions. Standardize a harness and manually verify. |
+| MEDIUM | `AUTH_SESSION_SECRET` is read but unused. README wording about “signed session cookies” does not match implementation: the cookie is a random opaque token looked up in JSON. Correct docs or implement signing. |
+| MEDIUM | JSON account persistence writes whole file synchronously without locking/atomic replacement/backup; multiple instances are unsafe. Use a database for production. |
+| MEDIUM | Job/session Maps are process-local. Restart loses work and multi-replica job polling fails. Use shared state or maintain exactly one replica. |
+| MEDIUM | Browser uses `innerHTML` for some problem/debug fields without escaping each field. Bundled data is current trust boundary; escape if content becomes user/API-supplied. |
+| MEDIUM | No explicit CSRF token/Origin check. SameSite=Lax helps, but explicit CSRF protection is safer for cookie-authenticated web routes. |
+| MEDIUM | Public Codespaces backend is temporary; don't use real passwords/sensitive data. The public execution route is gated by account login, not by a deployment-grade abuse/rate-control system. |
+| LOW | Remember-me and forgot-password controls are only markup. |
+| LOW | Terminal tabs share global VFS/cwd/history rather than true independent shells. |
+| LOW | Single breakpoint and desktop-oriented browser layout; Flutter is the real phone UI. |
+| LOW | Root README Flutter paragraph is stale and says scaffold/unavailable despite current Android build. Use `ANDROID_BUILD_GUIDE.md`; update README if project constraints allow. |
+
+No SQL means SQL injection is not applicable. No user file-upload endpoint exists. No explicit CORS configuration exists; website uses same origin, and native Flutter/Dio isn't governed by browser CORS. `spawn` takes a fixed executable and argument array; source content is in a file, not interpolated into a shell command. Docker resource restrictions are real but do not neutralize the privilege of mounting the Docker daemon socket.
+
+# Part 18: Architecture and Request Arrows
+
+```text
+User
+  -> Browser HTML/CSS/JS or native Flutter UI
+  -> client behavior/filter/editor/API service
+  -> Node HTTP server routes
+  -> auth JSON file OR Docker runner OR Judge0 provider
+  -> JSON/SSE response
+  -> browser DOM or Flutter widgets
+```
+
+The first arrow is clicks, text, and selected code. The second is local rendering or an HTTP request. The server validates and routes. Run uses Docker and returns streaming events; Submit calls Judge0 and returns polled JSON; Auth reads/writes JSON. The client formats returned data for people. There is no separate database layer or message queue.
+
+**Architecture classification:** client-server is supported. The Node service is a small monolith with route/helper functions in one file. API shape is REST-like. It is not a formal MVC implementation and not microservices. Docker and Judge0 are external execution components, not modules inside the browser.
+
+# Part 19: “Why Did You Use This?” Viva Answers
+
+- **Why HTML?** “HTML gives the browser the page structure and controls. In this project it defines navigation, problem tables, editors, result areas, and dialogs.”
+- **Why CSS?** “CSS controls the CodeArena dark theme, layout, editor/terminal appearance, and one mobile breakpoint without needing a UI framework.”
+- **Why JavaScript?** “Vanilla JavaScript handles filters, DOM updates, events, API fetches, SSE, and the terminal simulator; there is no frontend framework dependency.”
+- **Why Node.js?** “Node provides one server process for static pages and API calls, and its child-process APIs can invoke Docker and handle streaming output.”
+- **Why Docker?** “It runs user programs separately with resource and filesystem/network restrictions instead of executing arbitrary code inside the web server process.”
+- **Why Judge0?** “The backend delegates batch compilation/execution to a Judge0-compatible service and polls its asynchronous result; the provider URL/credentials stay server-side.”
+- **Why Flutter?** “Flutter builds a separate native-style Android UI from Dart widgets while reusing the existing API contract and bundled question data.”
+- **Why Dio?** “Dio provides HTTP requests, timeouts, JSON, interceptors, and error mapping for Flutter.”
+- **Why secure storage?** “It stores the mobile session cookie and local accepted IDs outside plain-text preferences. Passwords are never stored.”
+- **Why API?** “The app sends code to a trusted server service because a phone/browser should not run submitted programs on the UI process.”
+- **Why no database?** “This prototype uses a JSON auth file, Maps, and local/device storage. It is simpler to demonstrate but should be replaced with a database for multi-instance production.”
+- **Why this architecture?** “The website is a static client plus one Node server; the native app is another client. Run and Submit are separated because interactive stdin and test-case judging have different workflows.”
+
+# Part 20: Fifty Project-Specific Viva Questions
+
+Each answer starts with a short answer suitable for the viva, followed by a little more detail and the relevant code location.
+
+1. **What is CodeArena?** Simple: A coding practice and evaluation platform. Detail: It combines static problem data, browser/native editors, Docker Run, and optional Judge0 Submit. Code: `index.html`, `server.js`, `flutter_app/lib/main.dart`.
+2. **Which parts are browser and which are Android?** Simple: The repo has a modular website and separate Flutter app. Detail: The native app does not load the website in WebView. Code: `index.html`, `flutter_app/lib/screens/app_shell.dart`.
+3. **How many regular problems exist?** Simple: 100 records. Detail: IDs are 1–100 in `PROBLEMS`; validator checks IDs and metadata, not correctness. Code: `js/questions.js`, `tests/validate_problem_bank.js`.
+4. **How many debug questions?** Simple: 100, IDs 101–200. Detail: Generated from seed data with Easy/Moderate/Hard distribution 35/40/25. Code: `js/questions.js`, validator.
+5. **Is Bootstrap used?** Simple: No. Detail: Styles are custom CSS and browser JS is vanilla. Code: `index.html`, `css/style.css`.
+6. **Is Express used?** Simple: No. Detail: The server uses Node `http.createServer` and a custom dispatcher. Code: `server.js`.
+7. **What happens when the page loads?** Simple: Server returns HTML; browser loads CSS/data/JS. Detail: `DOMContentLoaded` renders arrays and checks auth. Code: server static handler, `index.html`, `app.js`.
+8. **How are problems searched?** Simple: Client-side filtering. Detail: Lowercases query and tests title/tags through `Array.filter`. Code: `renderProblems`.
+9. **What does Run do?** Simple: Runs complete source in Docker and streams output. Detail: POST returns run ID; SSE carries events; input/stop use additional routes. Code: `startInteractiveRun`, `handleInteractiveRun`.
+10. **What does Submit do?** Simple: Sends test cases through Judge0. Detail: Server posts Base64 source/stdin, polls token, compares output. Code: `submitCode`, `executeTest`.
+11. **Why are Run and Submit separate?** Simple: Run is an interactive terminal; Submit evaluates fixed cases. Detail: Run accepts stdin over a live session; Submit tracks expected output per case. Code: `/api/run`, `/api/judge`.
+12. **Where does Run code execute?** Simple: Docker on the Node backend host. Detail: Not in browser; the runner uses no network, limits, and read-only mounts. Code: `createInteractiveSession`, `runner.sh`.
+13. **Where does Submit code execute?** Simple: Judge0 when configured. Detail: CodeArena does not compile it itself; current Codespaces/Vercel setup has no live Judge0 provider. Code: `executeTest`.
+14. **What is a test case?** Simple: Input and expected output. Detail: Server accepts strings `stdin`/`expected` and optional unordered flag. Code: `/api/judge` validation.
+15. **How is Accepted decided?** Simple: Every test must run and match. Detail: Provider must report execution accepted and `outputsEqual` must pass. Code: `runExecutionJob`.
+16. **How are spaces handled?** Simple: Outer/trailing line spaces are normalized. Detail: JSON gets structural compare, number tolerance, and optional top-level unordered arrays. Code: `normalizeOutput`, `outputsEqual`.
+17. **What is SSE?** Simple: A long HTTP connection carrying named events. Detail: It carries `status`, `stdout`, `stderr`, and `finished` from server to UI. Code: `handleRunEvents`, `EventSource`, `InteractiveRunService`.
+18. **How does stdin work?** Simple: Client posts a string to a running session. Detail: Server writes it to child stdin and runner process reads normally. Code: `/api/run/{id}/input`.
+19. **How does Stop work?** Simple: Server asks Docker to stop the container. Detail: It retries stop and schedules a force kill. Code: `stopInteractiveSession`.
+20. **How is code fenced with Markdown handled?** Simple: Outer code fences may be stripped. Detail: `cleanSourceCode` removes a complete leading/trailing fence only. Code: `server.js`.
+21. **What does Docker sandboxing restrict?** Simple: Network, filesystem, privileges, resources, and runtime. Detail: no network, read-only root/source, UID 65534, 128 MiB, 0.5 CPU, pids 32. Code: Docker args in `createInteractiveSession`.
+22. **Is it fully secure?** Simple: It has meaningful limits but is not a guarantee. Detail: Backend mounting Docker socket is high privilege; public registration needs abuse controls. Code: `compose.backend.yaml`, server validation.
+23. **What languages exist?** Simple: Python, C, C++, JavaScript, Java. Detail: Runner maps each to interpreter/compiler and Judge0 maps IDs. Code: `runner.sh`, language maps.
+24. **What compilers are used?** Simple: gcc, g++, javac; Python/Node runtimes. Detail: Runner compiles C11/C++17 and Main.java. Code: `runner.sh`.
+25. **What does compilation error mean?** Simple: Compiler could not build source. Detail: Judge0 status 6 maps to Compilation Error; Docker Run emits compiler stderr/program failure. Code: `classify`, runner.
+26. **What does runtime error mean?** Simple: Program crashed after launch. Detail: Judge0 IDs 7–12 map to Runtime Error; interactive stderr is streamed. Code: `classify`, Run events.
+27. **How is timeout handled?** Simple: The process is stopped and reported. Detail: Judge0 deadline and runner timeout are separate configurable limits. Code: `executeTest`, session timeout.
+28. **Does a score get calculated?** Simple: No general score engine. Detail: Debug records have static point values; no service aggregates score. Code: `DEBUGGING_QUESTIONS`, `renderDebuggingProblems`.
+29. **Where is the leaderboard data?** Simple: Hard-coded in browser. Detail: `LB` contains sample names/values; Flutter says no live rankings. Code: `questions.js`, `renderLB`, `leaderboard_screen.dart`.
+30. **Is there a database?** Simple: No. Detail: JSON file, Maps, localStorage, assets, and Flutter secure storage are used. Code: `AUTH_STATE`, `VFS`, `ProgressStore`.
+31. **How are passwords stored?** Simple: Not as plain text; they are salted PBKDF2 hashes. Detail: 120,000 SHA-512 iterations and timingSafeEqual. Code: `hashPassword`, `verifyPassword`.
+32. **Is the session cookie signed?** Simple: It is a random opaque token looked up server-side, not HMAC-signed in current code. Detail: `AUTH_SESSION_SECRET` is declared but unused; docs saying signed cookie are inaccurate. Code: `generateToken`, `getCurrentUser`.
+33. **What is stored in `.data/auth.json`?** Simple: Users and sessions. Detail: Password hash, random IDs, session token, user ID, expiry; deployment volume persists file. Code: `loadAuthState`, `persistAuthState`.
+34. **Does logout delete the account?** Simple: No, it removes that session. Detail: User remains; cookie expires. Code: `/api/auth/logout`.
+35. **What does “Remember me” do?** Simple: Nothing currently. Detail: Checkbox has no event wiring; cookie expiry is configured globally. Code: login modal, `handleLogin`.
+36. **What does “Forgot password” do?** Simple: Nothing currently. Detail: Anchor is markup only; no reset route/email service. Code: `index.html`, auth routes.
+37. **Are profile stats real?** Simple: Mostly not in browser. Detail: Browser uses sample stats/formulas/random heatmap; Flutter shows only current account and locally accepted counts. Code: `renderDashboard`, `renderHeatmap`, `profile_screen.dart`.
+38. **What is saved in browser localStorage?** Simple: Display user data and debug progress. Detail: Not a database or password store; problem progress array is not updated by standard problem submit. Code: `getStoredProgress`, auth handlers.
+39. **What does the Flutter app use?** Simple: Native Dart/Flutter screens with Dio and secure storage. Detail: Asset repository and separate services call backend. Code: `main.dart`, `services/`.
+40. **How does Flutter know backend URL?** Simple: Compile-time `API_BASE_URL`. Detail: Release requires HTTPS; absent setting blocks API-dependent actions. Code: `api_config.dart`, build command.
+41. **Does Flutter use a WebView?** Simple: No. Detail: Widgets/screens are native Flutter and Android app has its own entrypoint. Code: `MainActivity.kt`, `main.dart`.
+42. **How does Flutter preserve login?** Simple: It stores cookie in platform secure storage. Detail: Dio interceptor writes Set-Cookie's session pair and sends Cookie on next calls. Code: `_SessionCookieInterceptor`.
+43. **Is Android progress synced?** Simple: No. Detail: Accepted IDs are device-only secure-storage lists. Code: `ProgressStore`.
+44. **Why is leaderboard blank in Flutter?** Simple: There is no live API. Detail: Static browser sample users are deliberately not presented as real. Code: `leaderboard_screen.dart`.
+45. **What tests exist?** Simple: Five Node validators plus two Flutter tests. Detail: They check metadata, output helpers, mocked Judge0, Docker Python/C, assets, dashboard. Code: `tests/`, `flutter_app/test/`.
+46. **Do tests prove all problems are correct?** Simple: No. Detail: Metadata shape/count validation does not execute/verify every expected algorithm answer. Code: problem-bank validator and README warning.
+47. **Why can Vercel fail?** Simple: Existing backend needs persistent Node and Docker. Detail: Serverless functions do not meet the runner/process-local maps/shared temp mount assumptions; deployed endpoints were observed 500. Code: `server.js`, deployment guide.
+48. **What does Caddy do?** Simple: Reverse proxy and HTTPS. Detail: It forwards public domain traffic to Node on port 8000 and manages TLS certificates. Code: `Caddyfile`, Compose.
+49. **Can multiple backend replicas run?** Simple: Not safely with current Maps/file writes. Detail: jobs belong to one process and auth file writes aren't coordinated. Code: `executionJobs`, `interactiveSessions`, JSON storage.
+50. **What is the honest biggest limitation?** Simple: Some data is sample/unverified and backend needs external services. Detail: The app demonstrates the execution architecture, but real Submit requires Judge0 and durable deployment requires a Docker-capable host. Code: README, server configuration, deployment files.
+
+# Part 21: Professor Cross-Questioning
+
+**Professor: Is this truly an online judge if Judge0 is not configured?**
+
+Answer: “The code implements the Judge0 integration, async job IDs, polling, error mapping, and test comparison, and tests it against a mock provider. A live Judge0 service is an external requirement. Without `JUDGE0_BASE_URL`, the server deliberately returns 503, so I would not claim live Submit is available in that environment.”
+
+**Professor: Where is your database?**
+
+Answer: “There isn't a database in the current repository. Auth rows are stored in `.data/auth.json`; jobs are in process-local Maps; browser data uses localStorage; Android accepted IDs are local secure storage. For production I would migrate auth and progress to a database and jobs to shared storage.”
+
+**Professor: How do you protect the server from malicious code?**
+
+Answer: “Interactive Run uses a Docker container with no network, read-only source/root, non-root UID, dropped capabilities, no-new-privileges, CPU/memory/PID/file limits, a runtime timeout, and output/input caps. The backend still needs a trusted Docker host; the Docker socket is very privileged.”
+
+**Professor: Can you prevent cheating?**
+
+Answer: “Not fully. There is a browser restricted-clipboard toggle, but a user can bypass client-side controls. The app does not include plagiarism detection, proctoring, hidden test secrecy, or a secure exam mode.”
+
+**Professor: How is your score calculated?**
+
+Answer: “The backend returns pass/fail verdicts, not an aggregate score. Debug questions have static score metadata. Browser profile and leaderboard numbers are sample data, so I should not present them as calculated user results.”
+
+**Professor: What happens if a provider times out?**
+
+Answer: “The job becomes an Execution Error with a category. Poll GETs may retry transient errors within a deadline; the initial POST is not retried because the provider might already have accepted it.”
+
+**Professor: Why use a function-style starter if judge stdin is raw?**
+
+Answer: “That is a real limitation. The test data is sent verbatim as stdin and there is no universal parser/harness. I would standardize each problem’s input contract and verify each expected output before claiming the bank is judge-ready.”
+
+**Professor: What happens if Node restarts mid-run?**
+
+Answer: “Job/session maps disappear and browser polling can return not found. The current design is one process. A production multi-instance design needs durable/shared job storage and a shared runner/session service.”
+
+**Professor: Why not use Firebase/SQL?**
+
+Answer: “The current prototype uses a simple JSON file and local stores; it does not use a database. That was simpler for a small demo, but it limits safe concurrency, querying, backups, and scale. The project doesn't document a measured comparison of alternatives.”
+
+**Professor: Which part is your algorithm?**
+
+Answer: “The project mainly integrates the execution pipeline, output comparison, async polling, filtering, and a constrained runner; it is not a new problem-solving algorithm collection. `outputsEqual` handles normalized text and structural JSON comparison.”
+
+# Part 22: Important Code Sections Explained
+
+1. **Problem source factory `P` — `js/questions.js`:** builds a common record from ID/title/difficulty/tags/examples/constraints/tests and adds language starter templates. Without it, each record would repeat the same shape. It does not create a custom algorithm harness.
+2. **Problem selection `openProblem` — `js/app.js`:** finds the selected problem, puts its details into the side panel, copies starter code into the textarea, updates line numbers, and shows Solve. Removing it breaks row-to-editor navigation.
+3. **Judge request `requestJudgeExecution` — `js/app.js`:** submits code/tests, validates execution ID, polls until terminal state, handles invalid JSON/status/504, and returns a user-visible error object. It is the browser's Submit bridge.
+4. **Docker runner `createInteractiveSession` — `server.js`:** maps language to filename, writes source in temp space, creates restrictive Docker args, starts `spawn`, forwards stdout/stderr, and emits state events. This is the core real Run mechanism.
+5. **Output comparator `outputsEqual` — `server.js`:** normalizes and compares strings/JSON. Without it, Judge0's process status alone would not prove output is correct.
+6. **Provider client `executeTest` — `server.js`:** constructs Base64 Judge0 payload, POSTs once, polls token, classifies status and returns output/time/memory. It is the actual Submit service integration.
+7. **Flutter API client `ApiClient` — `flutter_app/lib/services/api_client.dart`:** creates Dio with base URL/timeouts, adds cookie interceptor, validates configuration, and maps network errors. Screens should not hardcode hostnames.
+8. **Cookie interceptor — same file:** reads secure cookie before request and saves/expires it after response. Without it, backend HTTP-only session behavior would not persist across app calls.
+9. **Runner process commands — `runner.sh`:** uses Python, gcc, g++, Node, or javac/java. The Dockerfile provides these tools; deleting one install breaks that language's Run.
+10. **Flutter local progress — `ProgressStore`:** reads/writes sorted accepted-ID JSON lists in Flutter Secure Storage. It is intentionally device-local; it does not update server user data.
+
+# Part 23: Presentation Preparation
+
+## One-minute introduction
+
+“CodeArena is a practice platform implemented as both a browser app and a native Flutter Android app. The web client is plain HTML/CSS/JavaScript and the backend is a Node HTTP server. Users browse bundled exercises and can use interactive Run, which executes in a restricted Docker container. Submit is separate: it sends test cases through the backend to a Judge0-compatible provider, polls the result, and compares output. Auth uses hashed passwords and server sessions, but the prototype has no database; some progress and leaderboard data are sample or local. The main work needed for production is verified test data, a durable database/job store, abuse protection, and a deployed Judge0/Docker-capable backend.”
+
+## Three-minute explanation
+
+Use the 2-minute script in Part 1, then add: “The web terminal has a virtual filesystem, so commands such as `ls` and `cat` are simulated; commands that launch source files go through the Docker runner. In Flutter, exercises are bundled JSON generated from the same JavaScript source. Dio uses a compile-time HTTPS API origin, secure cookie storage handles login, and accepted IDs stay on-device. Tests include metadata checks, mocked Judge0 integration, and Docker Run for Python/C. These tests do not certify every problem answer or a real Judge0 account. The current Codespaces API is temporary and Submit needs provider credentials.”
+
+## Slide status
+
+No presentation/slides file is present in the tracked project inventory, so I cannot provide a slide-by-slide script from an existing deck. If you create slides, use: problem/background, objectives, architecture, browser/app UI, Run flow, Submit flow, authentication/storage, tests, limitations, and future work.
+
+# Part 24: Demonstration Script
+
+1. Open the website or APK and say this is the current browser/native client.
+2. Show Home; explicitly label animated counters as sample values.
+3. Open Problems; show title search and difficulty filter.
+4. Open one problem; explain that data is bundled and examples are source metadata.
+5. In editor, choose Python and run a complete program such as `print(1 + 1)`; show output `2`. For stdin, use `print(int(input()) * 2)` and enter `5` in Run input.
+6. Show Stop on a short sleep loop, then perhaps show a compile/runtime error in Docker if time.
+7. Explain Submit separately. Only demonstrate live Submit if a real Judge0 provider is configured and tested immediately before the presentation. Otherwise say it uses the Judge0 integration and show the mock-provider test, not a fabricated live verdict.
+8. Show Debugging Arena but disclose questions/tests are not independently validated.
+9. Show Terminal and explicitly explain `ls` is virtual while `python3 file.py` uses Docker.
+10. Show Profile / Leaderboard only as implementation status: local/demo stats and no live rankings.
+11. If showing Android, display native Flutter screens and explain its bundled data, sign-in, and API configuration. Avoid claiming all app backend routes are live if Codespace is asleep.
+
+Avoid claiming the browser profile's “Rank #42”, sample leaderboard names, random heatmap, home totals, every problem's correctness, the SQL playground, chatbot, or Interview Arena as production functionality.
+
+# Part 25: Strengths, Weaknesses, and Future Improvements
+
+## Strengths
+
+1. Clear separation between interactive Run and case-based Submit.
+2. Real Docker execution rather than browser `eval`.
+3. Defense-in-depth restrictions on runner containers.
+4. SSE streaming and interactive stdin/Stop.
+5. Async Judge0 job model with request IDs/logging.
+6. Output normalization and JSON comparison tests.
+7. Server-side password hashing and HTTP-only session cookie.
+8. Source-backed static data plus generator for Flutter assets.
+9. Separate native Android UI, not a WebView wrapper.
+10. Tests cover mock provider errors and actual local Docker Run.
+
+## Weaknesses
+
+1. No database or durable job store.
+2. Judge0 has no configured real service in sample environment.
+3. Vercel API was observed returning function errors and cannot provide Docker process assumptions.
+4. Problem tests can mismatch described function signatures.
+5. Browser leaderboard/profile/home values are fake/sample.
+6. No central submission history or server progress endpoint.
+7. No rate limiting/account verification/password reset.
+8. Session secret variable is unused and docs say “signed” inaccurately.
+9. Docker socket grants powerful host capability.
+10. Native editor lacks syntax highlighting; language coverage tests are incomplete.
+
+## Future work
+
+1. Store users/sessions in PostgreSQL or another durable database with migrations and backups.
+2. Move job/session state to Redis or an execution queue; separate API from worker.
+3. Deploy runner on a dedicated, hardened host/service with auditable lifecycle.
+4. Configure and monitor a real Judge0 provider; protect secrets.
+5. Define each problem's input parser/harness and verify all expected outputs.
+6. Persist submission records, progress, score, and leaderboard aggregates server-side.
+7. Add rate limiting, email verification, account recovery, CSRF/Origin controls, logging/monitoring.
+8. Add syntax highlighting and better editor accessibility/mobile ergonomics.
+9. Test all five languages, auth lifecycle, API errors, app network transitions, and device sizes.
+10. Remove or label every sample/demo metric and update stale README claims.
+
+## Honest response to criticism
+
+“This is a working prototype, not a production-scale judge. The execution design and tests demonstrate real Docker Run and the Judge0 adapter, but live Submit requires provider credentials. The dataset checks validate shape, not every solution. I’ve kept those limits explicit and designed the next steps around data verification, persistent storage, and secure deployment.”
+
+# Part 26: Final Cheat Sheet
+
+- **Definition:** browser + native Android coding-practice platform.
+- **Frontend:** HTML, custom CSS, vanilla JS; Android is Flutter/Dart.
+- **Backend:** one Node built-in HTTP server in `server.js`.
+- **Run:** interactive Docker execution, SSE, stdin, stop.
+- **Submit:** Judge0-compatible async submission/polling plus CodeArena output compare; provider required.
+- **Languages:** Python 3, C, C++, JavaScript, Java in configuration/runner.
+- **Data:** no DB; auth JSON file, jobs in Maps, browser localStorage, Android secure storage, static asset arrays.
+- **Security:** PBKDF2 password hashes, HTTP-only cookie, optional execution auth, restricted Docker runner; public registration and Docker socket are risks.
+- **Tests:** 5 Node validators + 2 Flutter tests; mock Judge0 and Docker Python/C; not all data/provider/language cases.
+- **Largest limits:** unverified problem tests, no live leaderboard/account progress, missing live Judge0, temporary Codespaces backend.
+- **Avoid claiming:** fake profile stats, leaderboard as real, simulated shell as real Linux, absent Interview/SQL/chatbot features.
+- **Build:** `flutter build apk --release --dart-define=API_BASE_URL=https://YOUR_HOST`.
+
+## Twenty short answers to memorize
+
+1. CodeArena helps learners browse coding exercises and run or submit code.
+2. The browser uses plain HTML, CSS, and JavaScript.
+3. The Android app is Flutter, not a WebView.
+4. The Node server uses built-in HTTP modules, not Express.
+5. Run is interactive and Docker-backed.
+6. Submit is test-based and uses Judge0 when configured.
+7. Run streams events using SSE.
+8. Submit polls an asynchronous execution ID/token.
+9. The runner supports Python, C, C++, JavaScript, and Java.
+10. The runner container has no network and has resource limits.
+11. There is no SQL database.
+12. Accounts are stored in `.data/auth.json` with password hashes.
+13. Browser progress uses localStorage.
+14. Android accepted progress stays on the device.
+15. The leaderboard is not live.
+16. Some profile and homepage statistics are sample values.
+17. Problem tests are not all independently verified.
+18. The backend is single-instance because job Maps are in memory.
+19. Vercel's API was returning HTTP 500; the Docker backend needs a persistent host.
+20. The honest next steps are real provider setup, verified test data, database/progress APIs, and stronger deployment controls.
+
+## Closing viva statement
+
+“CodeArena demonstrates a complete client-server execution idea: static problem data, native and browser interfaces, authenticated API routes, isolated Docker Run, and asynchronous Judge0 Submit. I can show which parts are working and tested, and I can also explain clearly what is still sample data or requires production services.”
